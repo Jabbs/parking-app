@@ -1,0 +1,64 @@
+<legend>List My Parking Spot</legend>
+<%= form_for(@listing) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="custom-well">
+		<h3 class="blue">Create Listing</h3>
+		<hr>
+		<div class="row">
+			<div class="span2">
+				<label>Spot: <span class="red">*</span></label>
+			</div>
+			<div>
+		    <%= f.collection_select :spot_id, @spots, :id, :name, prompt: "--select--" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Start Date: <span class="red">*</span></label>
+			</div>
+			<div>
+				<%= f.date_select :start_date, order: [:month, :day, :year] %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Start Time: <span class="red">*</span></label>
+			</div>
+			<div>
+				<%= f.select :start_time_slot, Listing::TIMES, prompt: "--select--"  %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>End Date: <span class="red">*</span></label>
+			</div>
+			<div>
+				 <%= f.date_select :end_date, order: [:month, :day, :year] %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>End Time: <span class="red">*</span></label>
+			</div>
+			<div>
+				<%= f.select :end_time_slot, Listing::TIMES, prompt: "--select--"  %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Hourly Price: <span class="red">*</span></label>
+			</div>
+			<div>
+				$<%= f.text_field :price, class: "span1" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<%= f.submit 'Create Listing', class: "btn btn-custom btn-large" %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+</br>

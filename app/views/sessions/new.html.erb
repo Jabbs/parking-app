@@ -1,0 +1,28 @@
+<legend>Please Sign In</legend>  
+<%= form_tag do %>
+<div class="row">
+	<div class="custom-well span5">
+		<div class="row">
+			<div class="span2">
+				<label>Email: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+				<%= text_field_tag :email, params[:email], class: "span3" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label class="inline">Password: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+				<%= password_field_tag :password, params[:password], class: "span3" %>
+			</div>
+		</div>
+			<hr>
+			<div>
+	      <%= submit_tag "Login", class: "btn-large btn pull-right" %>
+	    </div>
+			<p><small><%= link_to "forgot password?", '#' %></small></p>
+	<% end %>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<legend>Register My Parking Spot</legend>
+<%= form_for(@lease) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="custom-well">
+		<h3 class="blue">Register My Spot</h3>
+		<hr>
+		<div class="row">
+			<div class="span2">
+				<label>Building:</label>
+			</div>
+			<div>
+		    <%= current_user.building.name %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Spot:</label>
+			</div>
+			<div>
+				<%= f.collection_select :spot_id, @spots, :id, :name, prompt: "--select--" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span5">
+				<label class="checkbox">
+					<%= f.check_box(:confirmed) %>
+					I acknowledge that this is my parking spot.
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<%= f.submit 'Create', class: "btn btn-custom btn-large" %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+</br>

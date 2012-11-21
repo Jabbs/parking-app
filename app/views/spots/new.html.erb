@@ -1,0 +1,32 @@
+<legend>Create Parking Spot</legend>
+<%= form_for(@spot) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="custom-well">
+		<h3 class="blue">Create Spot</h3>
+		<hr>
+		<div class="row">
+			<div class="span2">
+				<label>Building:</label>
+			</div>
+			<div>
+		    <%= f.collection_select :building_id, @buildings, :id, :name, prompt: "--select--" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Spot:</label>
+			</div>
+			<div>
+				<%= f.text_field :name %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<%= f.submit 'Create', class: "btn btn-custom btn-large" %>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
+</br>

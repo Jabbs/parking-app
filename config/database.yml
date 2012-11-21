@@ -15,10 +15,11 @@
 development:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: parkingapp_development
   pool: 5
-  username: parkingapp
-  password:
+  username: postgres
+  password: pja1038
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -41,15 +42,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: parkingapp_test
   pool: 5
-  username: parkingapp
-  password:
+  username: postgres
+  password: pja1038
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: parkingapp_production
-  pool: 5
-  username: parkingapp
-  password:
