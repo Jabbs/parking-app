@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121213912) do
+ActiveRecord::Schema.define(:version => 20121122023350) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20121121213912) do
     t.integer  "end_time_slot"
     t.integer  "price"
   end
+
+  create_table "rent_hours", :force => true do |t|
+    t.integer  "listing_id"
+    t.boolean  "reserved",   :default => false
+    t.integer  "renter_id"
+    t.date     "date"
+    t.integer  "time_slot"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "rent_hours", ["id"], :name => "index_rent_hours_on_id"
 
   create_table "spots", :force => true do |t|
     t.string   "name"

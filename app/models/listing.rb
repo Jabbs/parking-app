@@ -1,7 +1,9 @@
 class Listing < ActiveRecord::Base
   attr_accessible :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, :price
-  validates :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, :price, presence: true
+  validates :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, presence: true
+  validates :price, presence: true, :numericality => { only_integer: true, greater_than: 0 }
   belongs_to :spot
+  has_many :rent_hours, dependent: :destroy
   
   TIMES = [  
     ["1:00am", 1], 
@@ -29,4 +31,22 @@ class Listing < ActiveRecord::Base
     ["11:00pm", 23], 
     ["12:00am", 24],
     ]
+    
+  def time_slot_start_hour
+    x = self.start_time_slot
+    TIMES.each do |key, value|
+      if value == x
+        return key
+      end
+    end
+  end
+  
+  def time_slot_end_hour
+    x = self.end_time_slot
+    TIMES.each do |key, value|
+      if value == x
+        return key
+      end
+    end
+  end
 end

@@ -18,6 +18,7 @@
 				<%= password_field_tag :password, params[:password], class: "span3" %>
 			</div>
 		</div>
+		<p>Dont have an account? Create one <%= link_to 'here', new_user_path %>.</p>
 			<hr>
 			<div>
 	      <%= submit_tag "Login", class: "btn-large btn pull-right" %>

@@ -14,9 +14,10 @@
 	  <tr>
 			<td><%= listing.spot.building.name %></td>
 			<td><%= listing.spot.name %></td>
-			<td><%= listing.start_date.strftime("%b %e, %Y") %></td>
-			<td><%= listing.end_date.strftime("%b %e, %Y") %></td>
+			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
+			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
 			<td><%= number_to_currency(listing.price) %>/hour</td>
+			<td><%= link_to 'remove', listing_path(listing), method: :delete %></td>
 		</tr>
 	<% end %>
 	</tbody>
