@@ -3,9 +3,11 @@ class Listing < ActiveRecord::Base
   validates :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, presence: true
   validates :price, presence: true, :numericality => { only_integer: true, greater_than: 0 }
   belongs_to :spot
+  belongs_to :building
   has_many :rent_hours, dependent: :destroy
   
   TIMES = [  
+    ["12:00am", 0],
     ["1:00am", 1], 
     ["2:00am", 2], 
     ["3:00am", 3], 
@@ -29,7 +31,6 @@ class Listing < ActiveRecord::Base
     ["9:00pm", 21], 
     ["10:00pm", 22], 
     ["11:00pm", 23], 
-    ["12:00am", 24],
     ]
     
   def time_slot_start_hour

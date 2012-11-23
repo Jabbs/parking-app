@@ -3,7 +3,7 @@
 	<%= render 'shared/error_messages', object: f.object %>
 <div class="row">
 	<div class="custom-well">
-		<h3 class="blue">Create Listing</h3>
+		<h3 class="blue">Create Listing at <%= current_user.building.name %></h3>
 		<hr>
 		<div class="row">
 			<div class="span2">
@@ -81,6 +81,7 @@
 			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
 			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
 			<td><%= number_to_currency(listing.price) %>/hour</td>
+			<td><%= link_to 'remove', listing_path(listing), method: :delete, confirm: "Are you sure?" %></td>
 		</tr>
 	<% end %>
 	</tbody>
