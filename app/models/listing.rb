@@ -4,7 +4,17 @@ class Listing < ActiveRecord::Base
   validates :price, presence: true, :numericality => { only_integer: true, greater_than: 0 }
   belongs_to :spot
   belongs_to :building
+  belongs_to :user
   has_many :rent_hours, dependent: :destroy
+  validates_date :start_date, :on_or_after => lambda { Date.today }
+  validates_date :start_date, :before => lambda { 1.year.from_now }
+  validates_date :end_date, :on_or_after => :start_date
+  validates :price, :numericality => { only_integer: true, less_than: 100 }
+  validates :end_time_slot, :numericality => { greater_than: :start_time_slot }, if: :same_day?
+  
+  def same_day?
+    start_date == end_date
+  end
   
   TIMES = [  
     ["12:00am", 0],

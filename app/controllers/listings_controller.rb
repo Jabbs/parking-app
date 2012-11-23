@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @listings = Listing.where(user_id: current_user.id)
+    @listings = Listing.where(user_id: current_user.id).order("start_date ASC")
     @spots = current_user.spots
   end
   
@@ -26,7 +26,31 @@ class ListingsController < ApplicationController
     @listing.building_id = current_user.building_id
     @spots = current_user.spots
 
+    # if @listings.where(:start_date => (params[:listing][:start_date])..(params[:listing][:end_date])).count != 0 || 
+    #    @listings.where(:end_date => (params[:listing][:start_date])..(params[:listing][:end_date])).count != 0
+    #   redirect_to new_listing_url, alert: "Only one listing is allowed per day"
+    #   return
+    # end if !params[:listing][:start_date].blank? && !params[:listing][:end_date].blank?
+    
     if @listing.save
+      
+      if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:date => (@listing.start_date..@listing.end_date)).where(:time_slot => (@listing.start_time_slot..23)).count != 0
+        @listing.delete
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        return
+      end if @listing.start_date != @listing.end_date
+      
+      if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:date => (@listing.start_date..@listing.end_date)).where(:time_slot => (0..(@listing.end_time_slot - 1))).count != 0
+        @listing.delete
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        return
+      end if @listing.start_date != @listing.end_date
+      
+      if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:time_slot => (@listing.start_time_slot..@listing.end_time_slot)).count != 0
+        @listing.delete
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        return
+      end if @listing.start_date == @listing.end_date
       
       # ---------------create rent hours ---------------
       
@@ -38,6 +62,7 @@ class ListingsController < ApplicationController
           rh.listing_id = @listing.id
           rh.date = date
           rh.time_slot = time_slot
+          rh.spot_id = @listing.spot_id
           rh.save!
         end
       end unless x == -1 || x == 0
@@ -47,6 +72,7 @@ class ListingsController < ApplicationController
         rh = RentHour.new
         rh.listing_id = @listing.id
         rh.date = @listing.start_date
+        rh.spot_id = @listing.spot_id
         rh.time_slot = n - 1
         n = n - 1
         rh.save!
@@ -56,6 +82,7 @@ class ListingsController < ApplicationController
       z.times do |n|
         rh = RentHour.new
         rh.listing_id = @listing.id
+        rh.spot_id = @listing.spot_id
         rh.date = @listing.end_date
         rh.time_slot = n
         rh.save!
@@ -66,6 +93,7 @@ class ListingsController < ApplicationController
         w.times {
           rh = RentHour.new
           rh.listing_id = @listing.id
+          rh.spot_id = @listing.spot_id
           rh.date = @listing.end_date
           rh.time_slot = v
           v = v + 1

@@ -1,61 +1,61 @@
-<legend>List My Parking Spot</legend>
 <%= form_for(@listing) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 <div class="row">
 	<div class="custom-well">
-		<h3 class="blue">Create Listing at <%= current_user.building.name %></h3>
+		<div class="row">
+			<div class="alert alert-info span11">
+				<i class="icon-info-sign"></i>
+			  Select the spot you would like to list, the start date/time, the end date/time, and the price per hour you would like
+				to charge.
+			</div>
+		</div>
+		<h3 class="blue">Share My Parking Spot
+		<span class="pull-right"><small>Building: </small><%= current_user.building.name %></span>	
+		</h3>
 		<hr>
 		<div class="row">
-			<div class="span2">
-				<label>Spot: <span class="red">*</span></label>
+			<div class="span1">
+				<label>Spot:</label>
 			</div>
-			<div>
-		    <%= f.collection_select :spot_id, @spots, :id, :name, prompt: "--select--" %>
+			<div class="span2">
+		    <%= f.collection_select :spot_id, @spots, :id, :name %>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="span1">
+				<label>Start:</label>
+			</div>
+			<div class="span2">
+				<%= f.text_field :start_date, placeholder: "Date" %>
+			</div>
+			<div class="span2 offset1">
+				<%= f.select :start_time_slot, Listing::TIMES  %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span2">
-				<label>Start Date: <span class="red">*</span></label>
+			<div class="span1">
+				<label>End:</label>
 			</div>
-			<div>
-				<%= f.date_select :start_date, order: [:month, :day, :year] %>
+			<div class="span2">
+				 <%= f.text_field :end_date, placeholder: "Date" %>
+			</div>
+			<div class="span2 offset1">
+				<%= f.select :end_time_slot, Listing::TIMES  %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span2">
-				<label>Start Time: <span class="red">*</span></label>
+			<div class="span1">
+				<label>Price:</label>
 			</div>
-			<div>
-				<%= f.select :start_time_slot, Listing::TIMES, prompt: "--select--"  %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span2">
-				<label>End Date: <span class="red">*</span></label>
-			</div>
-			<div>
-				 <%= f.date_select :end_date, order: [:month, :day, :year] %>
+			<div class="span5">
+				$<%= f.text_field :price, class: "span1" %> <p class="inline"><small>per hour</small></p>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
-			<div class="span2">
-				<label>End Time: <span class="red">*</span></label>
-			</div>
 			<div>
-				<%= f.select :end_time_slot, Listing::TIMES, prompt: "--select--"  %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span2">
-				<label>Hourly Price: <span class="red">*</span></label>
-			</div>
-			<div>
-				$<%= f.text_field :price, class: "span1" %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span2">
-				<%= f.submit 'Create Listing', class: "btn btn-custom btn-large" %>
+				<%= f.submit 'Create Listing', class: "btn btn-custom btn-large pull-right" %>
 			</div>
 		</div>
 	</div>

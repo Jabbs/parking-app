@@ -108,6 +108,16 @@ p {
 	 @include rounded_border;
 }
 
+/* Forms */
+
+label {
+	text-align: right;
+}
+
+hr {
+	margin: 10px 2px;
+}
+
 /* Header */
 
 header {

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   belongs_to :building
   has_many :leases
+  has_many :listings
+  has_many :rent_hours, through: :listings
   has_many :spots, through: :leases
   has_secure_password
   before_save { self.email.downcase! }

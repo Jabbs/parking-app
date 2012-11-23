@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require_tree .
+
+$(function() {
+  $("#listing_start_date").datepicker({
+		dateFormat: "yy-mm-dd"
+	});
+  $("#listing_end_date").datepicker({
+		dateFormat: "yy-mm-dd"	
+	});
+});
