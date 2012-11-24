@@ -1,0 +1,7 @@
+<%= form_for @search, method: :post do |f| %>
+		<%= f.hidden_field :building_id, value: current_user.building.id, readonly: true %>
+  <div class="field">
+    <%= f.text_field :begin_date, size: 10, value: Date.today %>
+  </div>
+  <div class="actions"><%= f.submit "Search", class: "btn" %></div>
+<% end %>

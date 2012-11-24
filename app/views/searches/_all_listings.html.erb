@@ -1,0 +1,27 @@
+<% if current_user.searches.count != 0 %>
+<legend>Search Results</legend>
+
+<table class="table table-striped table-condensed table-hover">
+	<thead>
+	  <tr>
+	    <th>Building</th>
+	    <th>Spot</th>
+	    <th>Start</th>
+	    <th>End</th>
+	    <th>Price</th>
+	  </tr>
+	</thead>
+	<tbody>
+	<% @listings.each do |listing| %>
+	  <tr>
+			<td><%= listing.spot.building.name %></td>
+			<td><%= listing.spot.name %></td>
+			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
+			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
+			<td><%= number_to_currency(listing.price) %>/hour</td>
+			<td><%= link_to 'Buy', '#', method: :delete, confirm: "Are you sure?" %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+<% end %>

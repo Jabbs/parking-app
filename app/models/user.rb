@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   belongs_to :building
   has_many :leases
   has_many :listings
+  has_many :searches
   has_many :rent_hours, through: :listings
   has_many :spots, through: :leases
   has_secure_password
