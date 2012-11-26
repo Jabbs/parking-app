@@ -13,6 +13,7 @@ class SearchesController < ApplicationController
   end
 
   def show
+    @listings = Listing.all
     @search = Search.new
     @search2 = Search.find(params[:id])
   end

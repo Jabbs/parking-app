@@ -1,7 +1,9 @@
+<h3 class="blue">Search by day</h3></br>
 <%= form_for @search, method: :post do |f| %>
 		<%= f.hidden_field :building_id, value: current_user.building.id, readonly: true %>
   <div class="field">
-    <%= f.text_field :begin_date, size: 10, value: Date.today %>
+    <%= f.text_field :begin_date, size: 10 %>
   </div>
-  <div class="actions"><%= f.submit "Search", class: "btn" %></div>
+  <div class="actions inline"><%= f.submit "Search", class: "btn" %></div>
+	<div class="pull-right"><%= link_to 'view all', new_search_path %></div>
 <% end %>

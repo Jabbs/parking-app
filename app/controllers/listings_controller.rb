@@ -25,30 +25,24 @@ class ListingsController < ApplicationController
     @listing.user_id = current_user.id
     @listing.building_id = current_user.building_id
     @spots = current_user.spots
-
-    # if @listings.where(:start_date => (params[:listing][:start_date])..(params[:listing][:end_date])).count != 0 || 
-    #    @listings.where(:end_date => (params[:listing][:start_date])..(params[:listing][:end_date])).count != 0
-    #   redirect_to new_listing_url, alert: "Only one listing is allowed per day"
-    #   return
-    # end if !params[:listing][:start_date].blank? && !params[:listing][:end_date].blank?
     
     if @listing.save
       
       if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:date => (@listing.start_date..@listing.end_date)).where(:time_slot => (@listing.start_time_slot..23)).count != 0
         @listing.delete
-        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created. Please select a new date and time."
         return
       end if @listing.start_date != @listing.end_date
       
       if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:date => (@listing.start_date..@listing.end_date)).where(:time_slot => (0..(@listing.end_time_slot - 1))).count != 0
         @listing.delete
-        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created. Please select a new date and time."
         return
       end if @listing.start_date != @listing.end_date
       
       if current_user.rent_hours.where(spot_id: @listing.spot_id).where(:time_slot => (@listing.start_time_slot..@listing.end_time_slot)).count != 0
         @listing.delete
-        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created."
+        redirect_to new_listing_url, alert: "This listing overlaps with a previous listing you have created. Please select a new date and time."
         return
       end if @listing.start_date == @listing.end_date
       
