@@ -1,14 +1,12 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">My Listings</a></li>
+  <li><%= link_to 'Reservations At My Spot', '#' %></li>
+  <li><%= link_to 'Revenue', '#' %></li>
+</ul>
 <%= form_for(@listing) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 <div class="row">
 	<div class="custom-well">
-		<div class="row">
-			<div class="alert alert-info span11">
-				<i class="icon-info-sign"></i>
-			  Select the spot you would like to list, the start date/time, the end date/time, and the price per hour you would like
-				to charge.
-			</div>
-		</div>
 		<h3 class="blue">Share My Parking Spot
 		<span class="pull-right"><small>Building: </small><%= current_user.building.name %></span>	
 		</h3>
@@ -44,17 +42,13 @@
 				<%= f.select :end_time_slot, Listing::TIMES  %>
 			</div>
 		</div>
-		<div class="row">
-			<div class="span1">
-				<label>Price:</label>
-			</div>
-			<div class="span5">
-				$<%= f.text_field :price, class: "span1" %> <p class="inline"><small>per hour</small></p>
-			</div>
-		</div>
 		<hr>
 		<div class="row">
-			<div>
+			<div class="span10 pull-left">
+				<p>*spots are listed at <span class="money">$3</span> per hour up to <span class="money">$10</span> 
+					if under 8 hours. Anything over 8 hours will be charged at <span class="money">$20</span> per day.</p>
+			</div>
+			<div class="span1 pull-right">
 				<%= f.submit 'Create Listing', class: "btn btn-custom btn-large pull-right" %>
 			</div>
 		</div>
@@ -63,15 +57,13 @@
 <% end %>
 
 <% if current_user.searches.count != 0 %>
-<legend>My Listings</legend>
 
-<table class="table table-striped table-condensed table-hover">
+<table class="table table-striped table-condensed">
 	<thead>
 	  <tr>
 	    <th>Spot</th>
 	    <th>Start</th>
 	    <th>End</th>
-	    <th>Price</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -80,7 +72,6 @@
 			<td><%= listing.spot.name %></td>
 			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
 			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
-			<td><%= number_to_currency(listing.price) %>/hour</td>
 			<td><%= link_to 'Remove', listing_path(listing), method: :delete, confirm: "Are you sure?" %></td>
 		</tr>
 	<% end %>

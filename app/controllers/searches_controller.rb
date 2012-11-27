@@ -1,19 +1,25 @@
 class SearchesController < ApplicationController
   def new
-    @listings = Listing.all
+    @listings = Listing.order("start_date ASC").order("start_time_slot ASC").paginate(page: params[:page], per_page: 10)
     @search = Search.new
-    @search2 = Search.where(user_id: current_user.id).last if current_user.searches.any?
+    
   end
 
   def create
-    @search = Search.create!(params[:search])
+    @listings = Listing.order("start_date ASC").order("start_time_slot ASC").paginate(page: params[:page], per_page: 10)
+    
+    @search = Search.new(params[:search])
     @search.user_id = current_user.id
-    @search.save
-    redirect_to @search
+    
+    if @search.save
+      redirect_to @search
+    else
+      render 'new'
+    end
   end
 
   def show
-    @listings = Listing.all
+    @listings = Listing.order("start_date ASC").order("start_time_slot ASC").paginate(page: params[:page], per_page: 10)
     @search = Search.new
     @search2 = Search.find(params[:id])
   end

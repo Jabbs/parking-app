@@ -5,7 +5,7 @@ class RentHour < ActiveRecord::Base
   #          :message => "Overlaps with another one of your listings." }
   belongs_to :listing
   belongs_to :renter, class_name: "User"
-  
+  belongs_to :spot
   
   TIMES = [  
     ["12:00am", 0],

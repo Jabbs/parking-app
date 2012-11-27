@@ -1,12 +1,11 @@
 <% if current_user.searches.count != 0 %>
-
+<%= will_paginate @listings %>
 <table class="table table-striped table-condensed table-hover">
 	<thead>
 	  <tr>
 	    <th>Spot</th>
 	    <th>Start</th>
 	    <th>End</th>
-	    <th>Price</th>
 	  </tr>
 	</thead>
 	<tbody>
@@ -15,10 +14,10 @@
 			<td><%= listing.spot.name %></td>
 			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
 			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
-			<td><%= number_to_currency(listing.price) %>/hour</td>
 			<td><%= link_to 'Reserve', '#' %></td>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
+<%= will_paginate @listings %>
 <% end %>

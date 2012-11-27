@@ -1,2 +1,21 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<legend>My Account</legend>
+
+<div class="row">
+	<div class="custom-well span8">
+		<div class="img span2"><%= image_tag "blank_avatar.jpg" %>
+		</div>
+		<ul class="unstyled">
+			<li><strong><%= @user.first_name %> <%= @user.last_name %></strong></li>
+			<li><%= @user.email %></li>
+		</ul>
+		<dl>
+			<dd>Member since: <%= @user.created_at.strftime("%b %e, %Y") %></dd>
+			<dd>Status: 
+				<%= @user.verified? ? 'Verified' : "Unverified" %> 
+				<% if !@user.verified? %>
+					(<%= link_to 'Resend verification email', '#' %>)
+				<% end %>
+			</dd>
+		</dl>
+	</div>
+</div>

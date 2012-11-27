@@ -1,7 +1,6 @@
 class Listing < ActiveRecord::Base
-  attr_accessible :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, :price
+  attr_accessible :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot
   validates :end_date, :spot_id, :start_date, :start_time_slot, :end_time_slot, presence: true
-  validates :price, presence: true, :numericality => { only_integer: true, greater_than: 0 }
   belongs_to :spot
   belongs_to :building
   belongs_to :user
@@ -9,7 +8,6 @@ class Listing < ActiveRecord::Base
   validates_date :start_date, :on_or_after => lambda { Date.today }
   validates_date :start_date, :before => lambda { 1.year.from_now }
   validates_date :end_date, :on_or_after => :start_date
-  validates :price, :numericality => { only_integer: true, less_than: 100 }
   validates :end_time_slot, :numericality => { greater_than: :start_time_slot }, if: :same_day?
   
   def same_day?

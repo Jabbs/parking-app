@@ -1,9 +1,56 @@
-<h3 class="blue">Search by day</h3></br>
-<%= form_for @search, method: :post do |f| %>
-		<%= f.hidden_field :building_id, value: current_user.building.id, readonly: true %>
-  <div class="field">
-    <%= f.text_field :begin_date, size: 10 %>
-  </div>
-  <div class="actions inline"><%= f.submit "Search", class: "btn" %></div>
-	<div class="pull-right"><%= link_to 'view all', new_search_path %></div>
+<%= form_for(@search) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+<%= f.hidden_field :building_id, value: current_user.building.id %>
+<h3>When would you like to reserve parking?
+	<span class="pull-right"><%= link_to 'view all listings', new_search_path %></span>
+</h3>
+<hr>
+<div class="row">
+	<div class="span1">
+		<label>Start:</label>
+	</div>
+	<div class="span2">
+		<% if @search2 %>
+		<%= f.text_field :start_date, placeholder: "Date", value: @search2.start_date %>
+		<% else %>
+		<%= f.text_field :start_date, placeholder: "Date" %>
+		<% end %>
+	</div>
+	<div class="span2 offset1">
+		<% if @search2 %>
+		<%= f.select :start_time_slot, Listing::TIMES, selected: @search2.start_time_slot %>
+		<% else %>
+		<%= f.select :start_time_slot, Listing::TIMES %>
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="span1">
+		<label>End:</label>
+	</div>
+	<div class="span2">
+		<% if @search2 %>
+		<%= f.text_field :end_date, placeholder: "Date", value: @search2.end_date %>
+		<% else %>
+		<%= f.text_field :end_date, placeholder: "Date" %>
+		<% end %>
+	</div>
+	<div class="span2 offset1">
+		<% if @search2 %>
+		<%= f.select :end_time_slot, Listing::TIMES, selected: @search2.end_time_slot %>
+		<% else %>
+		<%= f.select :end_time_slot, Listing::TIMES %>
+		<% end %>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="span5 pull-left">
+		<p>*spots are <span class="money">$3</span> per hour up to <span class="money">$10</span> 
+			if under 8 hours. Anything over 8 hours will be charged at <span class="money">$20</span> per day.</p>
+	</div>
+	<div class="span1 pull-right">
+		<%= f.submit "Search", class: "btn btn-large pull-right" %>
+	</div>
+</div>
 <% end %>

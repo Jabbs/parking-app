@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @listings = Listing.where(user_id: current_user.id).order("start_date ASC")
+    @listings = Listing.where(user_id: current_user.id).order("start_date ASC").order("spot_id ASC")
     @spots = current_user.spots
   end
   

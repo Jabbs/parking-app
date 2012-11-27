@@ -1,5 +1,5 @@
 <strong><%= time %></strong></br>
 <% renthour.each do |rh| %>
-Spot <%= rh.listing.spot.name %> <span class="money"><%= number_to_currency(rh.listing.price) %></span> 
+Spot <%= rh.listing.spot.name %>
 (<%= link_to 'add', '#' %>) </br>
 <% end %>

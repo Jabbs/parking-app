@@ -1,26 +1,27 @@
-<% if @search2.listings.count != 0 %>
+<% if @search2.rent_hours.count != 0 %>
+
+<h3><%= @search2.rent_hours.uniq { |s| s.spot.name }.count %> spots available!
+</h3>
+<hr>
 
 <table class="table table-striped table-condensed table-hover">
 	<thead>
 	  <tr>
 	    <th>Spot</th>
-	    <th>Start</th>
-	    <th>End</th>
-	    <th>Price</th>
+	    <th>Hour</th>
+	    <th></th>
 	  </tr>
 	</thead>
 	<tbody>
-	<% @search2.listings.each do |listing| %>
+	<% @search2.rent_hours.uniq { |s| s.spot.name }.each do |rh| %>
 	  <tr>
-			<td><%= listing.spot.name %></td>
-			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
-			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
-			<td><%= number_to_currency(listing.price) %>/hour</td>
-			<td><%= link_to 'Reserve', '#' %></td>
+			<td><%= rh.spot.name %></td>
+			<td><%= @search2.time_slot_start_hour %> - <%= @search2.time_slot_end_hour %>, <%= rh.date.strftime("%b %e, %Y") %></td>
+			<td><%= link_to 'Add', '#' %></td>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
 <% else %>
-<em>No spots listed for <%= @search2.begin_date.strftime("%b %e, %Y") %></em>
+<em>No spots available at this time.</em>
 <% end %>
