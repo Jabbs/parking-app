@@ -2,18 +2,17 @@
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.hidden_field :building_id, value: current_user.building.id %>
 <h3>When would you like to reserve parking?
-	<span class="pull-right"><%= link_to 'view all listings', new_search_path %></span>
 </h3>
 <hr>
 <div class="row">
 	<div class="span1">
 		<label>Start:</label>
 	</div>
-	<div class="span2">
+	<div class="span1">
 		<% if @search2 %>
-		<%= f.text_field :start_date, placeholder: "Date", value: @search2.start_date %>
+		<%= f.text_field :start_date, placeholder: "Date", value: @search2.start_date, class: "input-small" %>
 		<% else %>
-		<%= f.text_field :start_date, placeholder: "Date" %>
+		<%= f.text_field :start_date, placeholder: "Date", class: "input-small" %>
 		<% end %>
 	</div>
 	<div class="span2 offset1">
@@ -28,11 +27,11 @@
 	<div class="span1">
 		<label>End:</label>
 	</div>
-	<div class="span2">
+	<div class="span1">
 		<% if @search2 %>
-		<%= f.text_field :end_date, placeholder: "Date", value: @search2.end_date %>
+		<%= f.text_field :end_date, placeholder: "Date", value: @search2.end_date, class: "input-small" %>
 		<% else %>
-		<%= f.text_field :end_date, placeholder: "Date" %>
+		<%= f.text_field :end_date, placeholder: "Date", class: "input-small" %>
 		<% end %>
 	</div>
 	<div class="span2 offset1">
@@ -47,7 +46,7 @@
 <div class="row">
 	<div class="span5 pull-left">
 		<p>*spots are <span class="money">$3</span> per hour up to <span class="money">$10</span> 
-			if under 8 hours. Anything over 8 hours will be charged at <span class="money">$20</span> per day.</p>
+			if under 8 hours. Anything over 8 hours will be <span class="money">$20</span> per day.</p>
 	</div>
 	<div class="span1 pull-right">
 		<%= f.submit "Search", class: "btn btn-large pull-right" %>

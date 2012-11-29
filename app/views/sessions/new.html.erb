@@ -1,29 +1,43 @@
-<legend>Please Sign In</legend>  
-<%= form_tag do %>
 <div class="row">
-	<div class="custom-well span5">
-		<div class="row">
-			<div class="span2">
-				<label>Email:</label>
-			</div>
-			<div class="span2">
-				<%= text_field_tag :email, params[:email], class: "span3" %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span2">
-				<label>Password:</label>
-			</div>
-			<div class="span2">
-				<%= password_field_tag :password, params[:password], class: "span3" %>
-			</div>
-		</div>
-		<p>Dont have an account? Create one <%= link_to 'here', new_user_path %>.</p>
-			<hr>
-			<div>
-	      <%= submit_tag "Login", class: "btn-large btn pull-right" %>
-	    </div>
-			<p><small><%= link_to "forgot password?", '#' %></small></p>
+	<div class="hero-unit span6">
+	  <h1>ShareTheLot</h1>
+	  <p class="red">Where you can rent your neighbor's parking spot.</p>
+	  <p>
+			<%= button_to "Sign Up!", new_user_path, method: :get, class: "btn btn-large blue" %>
+	  </p>
+	</div>
+	<% unless current_user %>
+	<div class="custom-well span4 pull-right">
+		<%= render 'login' %>
+	</div>
 	<% end %>
+</div>
+<hr>
+</br>
+<div class="row">
+	<div class="span4">
+		<h2>Share Your Spot</h2>
+		<hr class="red">
+		<p class="center">
+			</br>
+			Out of town? Car in the shop? Make money by sharing your parking spot with your neighbors.
+		</p>
+	</div>
+	<div class="span4">
+		<h2>Reserve A Spot</h2>
+		<hr>
+		<p class="center">
+			</br>
+			Need an extra spot for a few hours? or a weekend? Don't park across the street, rent your neighbors spot.
+		</p>
+	</div>
+	<div class="span4">
+		<h2>Get Involved</h2>
+		<hr>
+		<p class="center">
+			</br>
+			Landlords and property managers please <%= link_to 'contact us', '#' %> for more information about how you can offer this
+			service to your tenants.
+		</p>
 	</div>
 </div>

@@ -10,8 +10,8 @@ class Search < ActiveRecord::Base
     start_date == end_date
   end
   
-  def rent_hours
-    @rent_hours ||= find_rent_hours
+  def rent_hour_groups
+    @rent_hour_groups ||= find_rent_hours
   end
   
   TIMES = [  
@@ -80,7 +80,24 @@ class Search < ActiveRecord::Base
       rent_hours.delete_if { |x| x.spot_id == spot_id } if total_hours != rent_hours_with_same_spot_id_count
     end
     
-    rent_hours
+    rent_hour_groups = []
+    
+    rent_hours.uniq { |s| s.spot.id }.each do |rh|
+      x = rent_hours.select { |y| y.spot_id == rh.spot_id }
+      rent_hour_groups << x
+    end
+    
+    rent_hour_groups2 = []
+    
+    if Cart.where(user_id: user_id).last
+      rent_hour_groups.each do |rh_group|
+        rent_hour_groups2 << rh_group unless Cart.where(user_id: user_id).last.rent_hours.find_by_id(rh_group.first)
+      end
+    else
+      rent_hour_groups2 = rent_hour_groups
+    end
+    
+    rent_hour_groups2
     
     
     # listings = listings.where(:start_date => ( begin_date...end_date) ) if begin_date.present?

@@ -43,4 +43,13 @@ class RentHour < ActiveRecord::Base
     end
   end
   
+  def time_slot_end_hour
+    x = self.time_slot + 1
+    TIMES.each do |key, value|
+      if value == x
+        return key
+      end
+    end
+  end
+  
 end

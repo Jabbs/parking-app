@@ -1,6 +1,6 @@
-<% if @search2.rent_hours.count != 0 %>
+<% if @search2.rent_hour_groups.count != 0 %>
 
-<h3><%= @search2.rent_hours.uniq { |s| s.spot.name }.count %> spots available!
+<h3 class="red"><%= pluralize(@search2.rent_hour_groups.count, 'spot') %> available!
 </h3>
 <hr>
 
@@ -8,20 +8,21 @@
 	<thead>
 	  <tr>
 	    <th>Spot</th>
-	    <th>Hour</th>
+	    <th>Time</th>
 	    <th></th>
 	  </tr>
 	</thead>
 	<tbody>
-	<% @search2.rent_hours.uniq { |s| s.spot.name }.each do |rh| %>
+	<% @search2.rent_hour_groups.each do |rh_group| %>
 	  <tr>
-			<td><%= rh.spot.name %></td>
-			<td><%= @search2.time_slot_start_hour %> - <%= @search2.time_slot_end_hour %>, <%= rh.date.strftime("%b %e, %Y") %></td>
-			<td><%= link_to 'Add', '#' %></td>
+			<td><%= rh_group.first.spot.name %></td>
+			<td><%= @search2.start_date.strftime("%b %e, %Y") %> <%= @search2.time_slot_start_hour %> - 
+			<%= @search2.end_date.strftime("%b %e, %Y") %> <%= @search2.time_slot_end_hour %> </td>
+			<td><%= link_to 'Add To Cart', carts_path(@cart, query: rh_group), method: :post %></td>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
 <% else %>
-<em>No spots available at this time.</em>
+<div class="alert alert-error">***No spots available at the selected time.***</div>
 <% end %>

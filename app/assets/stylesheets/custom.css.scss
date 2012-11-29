@@ -5,8 +5,9 @@ $navbarBorder: none;
 $grayMediumLight: #eaeaea;
 $darkblue: #1E37A0;
 $yellow: #DFA414;
-$grey: #EFEFEF;
-$darkgrey: #A7A7A7;
+$grey: #E9E9E9;
+$darkgrey: #656565;
+$red: #C30202;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -33,6 +34,26 @@ $darkgrey: #A7A7A7;
   background: linear-gradient(top, #fff, $grey);
 }
 
+@mixin grey_white_gradient {
+	background: $grey;
+  background: -webkit-linear-gradient(top, $grey, #fff);
+  background: -moz-linear-gradient(top, $grey, #fff);
+  background: -ms-linear-gradient(top, $grey, #fff);
+  background: -o-linear-gradient(top, $grey, #fff);
+  background: -webkit-linear-gradient(top, $grey, #fff);
+  background: linear-gradient(top, $grey, #fff);
+}
+
+@mixin blue_white_gradient {
+	background: $grey;
+  background: -webkit-linear-gradient(top, $grey, $darkblue);
+  background: -moz-linear-gradient(top, $grey, $darkblue);
+  background: -ms-linear-gradient(top, $grey, $darkblue);
+  background: -o-linear-gradient(top, $grey, $darkblue);
+  background: -webkit-linear-gradient(top, $grey, $darkblue);
+  background: linear-gradient(top, $grey, $darkblue);
+}
+
 /* Universal */
 
 html {
@@ -41,6 +62,7 @@ html {
 
 body {
 	margin-top: 50px;
+	@include white_grey_gradient;
 }
 
 /* typography */
@@ -52,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2.2em;
   letter-spacing: 0px;
+	color: $darkblue;
 	padding: 10px 0;
 }
 
@@ -79,6 +102,10 @@ p {
 		margin: 0 10px;
 }
 
+.center {
+	text-align: center;
+}
+
 .inline {
 	display: inline;
 }
@@ -89,6 +116,10 @@ p {
 
 .blue {
 	color: $darkblue;
+}
+
+.red {
+	color: $red;
 }
 
 
@@ -112,25 +143,83 @@ p {
 	 @include rounded_border;
 }
 
+.custom-well-no-left-padding {
+	 padding: 10px 10px 10px 10px;
+	 margin: 0 0 20px 0;
+	 @include white_grey_gradient;
+	 border: 1px solid $darkblue;
+	 @include rounded_border;
+}
+
+.hero-unit {
+	@include grey_white_gradient;
+	border: 1px solid $darkblue;
+}
+
 /* Forms */
 
 hr {
 	margin: 10px 2px;
 }
 
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
+
+/* Buttons */
+
+.login {
+	margin-right: 10px;
+}
+
 /* Header */
+
+ul.nav li.dropdown a{
+    color: $darkblue;    
+		&:hover {
+			color: $darkblue;
+		}
+}
+
+.red-caret {
+	border-top-color: red !important;
+	border-bottom-color: red !important;
+}
 
 header {
 	.navbar {
 		border: none;
 	}
 	.navbar-inner {
-		background: $darkblue;
+		@include white_grey_gradient;
+		p {
+			margin-right: 10px;
+		}
 		ul {
+			li.off {
+				a {
+					color: $darkblue;
+					&:hover {
+						color: $darkblue;
+					}
+				}
+			}
 			li.on {
 				background: $darkblue;
 				a {
 					color: white;
+					&:hover {
+						color: white;
+					}
 				}
 			}
 		}
@@ -138,17 +227,13 @@ header {
 }
 
 #logo {
-	color: white;
+	color: $darkblue;
   float: left;
 	padding-right: 0;
   &:hover {
     text-decoration: none;
 		background-color: transparent;
   }
-}
-
-.pink {
-	color: #BC0096;
 }
 
 /* Footer */
@@ -177,18 +262,3 @@ footer {
     }
   }
 }
-
-/* forms */
-
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .control-group;
-  @extend .error;
- }

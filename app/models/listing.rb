@@ -8,10 +8,14 @@ class Listing < ActiveRecord::Base
   validates_date :start_date, :on_or_after => lambda { Date.today }
   validates_date :start_date, :before => lambda { 1.year.from_now }
   validates_date :end_date, :on_or_after => :start_date
-  validates :end_time_slot, :numericality => { greater_than: :start_time_slot }, if: :same_day?
+  validates :end_time_slot, :numericality => { greater_than: :start_time_plus_3_hours }, if: :same_day?
   
   def same_day?
     start_date == end_date
+  end
+  
+  def start_time_plus_3_hours
+    start_time_slot + 3
   end
   
   TIMES = [  

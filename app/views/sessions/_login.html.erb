@@ -1,0 +1,26 @@
+<%= form_tag do %>
+<h3>Sign In</h3>
+<hr>
+<div class="row">
+	<div class="span1">
+		<label>Email:</label>
+	</div>
+	<div class="span2">
+		<%= text_field_tag :email, params[:email], class: "span3" %>
+	</div>
+</div>
+<div class="row">
+	<div class="span1">
+		<label>Password:</label>
+	</div>
+	<div class="span2">
+		<%= password_field_tag :password, params[:password], class: "span3" %>
+	</div>
+</div>
+	<hr>
+	<div>
+    <%= submit_tag "Login", class: "btn-large btn pull-left login" %>
+  </div>
+	</br>
+	<p class="inline pull-left"><small><%= link_to "forgot password?", '#' %></small></p>
+<% end %>

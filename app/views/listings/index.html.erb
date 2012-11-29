@@ -1,54 +1,35 @@
-
-<p><%= link_to "Search By Day", new_search_path %></p>
-<table class="table table-striped table-condensed table-hover">
-	<thead>
-	  <tr>
-	    <th><%= Date.today.strftime("%A") %></br>
-					<%= Date.today.strftime("(%m/%d)") %>
-			</th>
-	    <th><%= (Date.today + 1).strftime("%A") %></br>
-					<%= (Date.today + 1).strftime("(%m/%d)") %>
-			</th>
-			<th><%= (Date.today + 2).strftime("%A") %></br>
-					<%= (Date.today + 2).strftime("(%m/%d)") %>
-			</th>
-			<th><%= (Date.today + 3).strftime("%A") %></br>
-					<%= (Date.today + 3).strftime("(%m/%d)") %>
-			</th>
-			<th><%= (Date.today + 4).strftime("%A") %></br>
-					<%= (Date.today + 4).strftime("(%m/%d)") %>
-			</th>
-			<th><%= (Date.today + 5).strftime("%A") %></br>
-					<%= (Date.today + 5).strftime("(%m/%d)") %>
-			</th>
-			<th><%= (Date.today + 6).strftime("%A") %></br>
-					<%= (Date.today + 6).strftime("(%m/%d)") %>
-			</th>
-	  </tr>
-	</thead>
-	<tbody>
-	  <tr>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_1 %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_2 %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_3 %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_4 %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_5 %>
-			</td>
-			<td>
-				<%= render 'today', renthours_today: @renthours_today_6 %>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<div class="row">
+	<div class="span7">
+			<ul class="nav nav-tabs">
+			  <li><%= link_to 'Search', new_search_path %></li>
+			  <li class="active"><a href="#">All Listings</a></li>
+			  <li><%= link_to 'Reservations', '#' %></li>
+			  <li><%= link_to 'Checkout', '#' %></li>
+			</ul>
+			
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>Spot</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @listings.each do |listing| %>
+				<tr>
+					<td><%= listing.spot.name %></td>
+					<td><%= listing.start_date %></td>
+					<td><%= listing.end_date %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<div class="span5">
+		<div class="custom-well span4 pull-right">
+			<h3>Cart</h3>
+			<hr>
+		</div>
+	</div>
+</div>
