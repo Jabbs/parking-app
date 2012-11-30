@@ -14,7 +14,7 @@ Parkingapp::Application.routes.draw do
   resources :spots, only: [:index, :new, :edit, :create]
   resources :buildings
   resources :users, only: [:new, :create, :show]
-  resources :reservations, only: [:create, :destroy, :index]
+  resources :reservations, only: [:create, :destroy, :index, :show]
   root :to => 'sessions#new'
 
 end

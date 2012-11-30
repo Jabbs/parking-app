@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="span12">
+		<ul class="nav nav-tabs">
+		  <li><%= link_to 'Search', new_search_path %></li>
+			<li class="active"><a href="#">Reservations</a></li>
+		  <li><%= link_to 'Checkout', checkout_path %></li>
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="custom-well-span12">
+		<%= link_to 'Reservations', reservations_path %> / <%= "#100#{@reservation.id}" %>
+		<%= link_to raw('<i class="icon-print"></i> Print'), '#', class: "pull-right" %>
+	</div>
+</div>

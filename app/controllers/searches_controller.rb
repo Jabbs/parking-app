@@ -3,7 +3,6 @@ class SearchesController < ApplicationController
     @listings = Listing.order("start_date ASC").order("start_time_slot ASC").paginate(page: params[:page], per_page: 10)
     @search = Search.new
     @cart = Cart.where(user_id: current_user.id).last if Cart.where(user_id: current_user.id).last
-    
   end
 
   def create

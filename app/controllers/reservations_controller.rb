@@ -1,5 +1,9 @@
 class ReservationsController < ApplicationController
   
+  def show
+    @reservation = Reservation.find(params[:id])
+  end
+  
   def create
     if Cart.where(user_id: current_user).last
       @cart = Cart.where(user_id: current_user).last
@@ -36,7 +40,8 @@ class ReservationsController < ApplicationController
       rh.save
     end
     @cart.destroy
-    redirect_to reservations_url
+    redirect_to reservations_url, notice: "Your payment has been processed. Confirmation and parking reservation(s) have
+    sent to your email."
   end
   
   def destroy

@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   def index
-    @listings = Listing.where(user_id: current_user.id).where("end_date >= ?", Date.today)
+    @listings = Listing.where("end_date >= ?", Date.today)
     @renthours_today = RentHour.where(date: Date.today)
     @renthours_today_1 = RentHour.where(date: (Date.today + 1))
     @renthours_today_2 = RentHour.where(date: (Date.today + 2))

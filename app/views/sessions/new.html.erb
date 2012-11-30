@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="hero-unit span6">
-	  <h1>ShareTheLot</h1>
-	  <p class="red">Rent parking spots from others in your building.</p>
+	  <h1>Rent spots from others in your building.</h1>
 	  <p>
 		<% unless current_user %>
 			<%= button_to "Sign Up!", new_user_path, method: :get, class: "btn btn-large blue" %>
@@ -9,7 +8,7 @@
 	  </p>
 	</div>
 	<% unless current_user %>
-	<div class="custom-well span4 pull-right">
+	<div class="span4 home-page-well">
 		<%= render 'login' %>
 	</div>
 	<% end %>

@@ -10,7 +10,7 @@ class LeasesController < ApplicationController
     @lease.user_id = current_user.id
 
     if @lease.save
-      redirect_to new_listing_url, notice: "Your spot has been registered."
+      redirect_to new_listing_url, notice: "Your parking spot has been registered."
     else
       render action: "new"
     end

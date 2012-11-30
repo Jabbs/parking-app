@@ -8,6 +8,7 @@ $yellow: #DFA414;
 $grey: #E9E9E9;
 $darkgrey: #656565;
 $red: #C30202;
+$darkred: #A10101;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -61,7 +62,7 @@ html {
 }
 
 body {
-	margin-top: 50px;
+	margin-top: 60px;
 	@include white_grey_gradient;
 }
 
@@ -169,12 +170,40 @@ legend {
 	 @include rounded_border;
 }
 
+.home-page-well {
+	 padding: 10px 10px 10px 10px;
+	 width: 316px;
+	 margin-right: 0px;
+	 margin-left: 20px;
+	 margin-bottom: 20px;
+	 background: $grey;
+	 @include rounded_border;
+	 h2 {
+		color: $red;
+	}
+	 p {
+		color: white;
+	}
+}
+
 .hero-unit {
-	@include grey_white_gradient;
+	background-image:url('chicago-parking-garage.jpg');
 	border: 1px solid $darkblue;
+	h1 {
+		color: white;
+		font-size: 3em;
+		@include rounded_border;
+		background: $darkred;
+		padding: 15px;
+	}
 }
 
 /* Forms */
+
+.email-input {
+		width: 160px;
+		margin: 5px 3px 0 0;
+}
 
 hr {
 	margin: 10px 2px;
@@ -256,7 +285,8 @@ header {
 #logo {
 	color: $darkblue;
   float: left;
-	padding-right: 0;
+	padding-right: 20px;
+	font-family: "Arial",Verdana,Sans-serif;
   &:hover {
     text-decoration: none;
 		background-color: transparent;

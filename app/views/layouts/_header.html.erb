@@ -2,8 +2,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 	  <div class="navbar-inner">
 	    <div class="container">
-	      <%= link_to "ShareTheLot", root_url, id: 'logo', class: 'brand' %>
-				<p class="inline pull-left"><small class="red">BETA</small></p>
+	      <%= link_to raw('<strong>ShareThe<span class="red">Lot</span></strong>'), root_url, id: 'logo', class: 'brand' %>
 				<% if current_user %>
         <ul class="nav pull-left">
 					<% if controller_name == "searches" || controller_name == "reservations" %>
@@ -14,11 +13,11 @@
 						<li class="off"><%= link_to 'Reserve A Spot', new_search_path %></li>
 					<% end %>
 					<% if controller_name == "listings" && action_name == "index" %>
-						<li class="off"><%= link_to 'List My Spot', new_listing_path %></li>
+						<li class="off"><%= link_to 'Share My Spot', new_listing_path %></li>
 					<% elsif controller_name == "listings" %>
-						<li class="on"><%= link_to 'List My Spot', new_listing_path %></li>
+						<li class="on"><%= link_to 'Share My Spot', new_listing_path %></li>
 					<% else %>
-						<li class="off"><%= link_to 'List My Spot', new_listing_path %></li>
+						<li class="off"><%= link_to 'Share My Spot', new_listing_path %></li>
 					<% end %>
 				</ul>
 				
@@ -35,9 +34,7 @@
             </ul>
           </li>
         </ul>
-
-					<div class="building_name">Parking Lot: <span class="red"><%= current_user.building.name %></span></div>
-
+				<div class="building_name">Parking Lot: <span class="red"><%= current_user.building.name %></span></div>
 				<% end %>
 	    </div>
 	  </div>

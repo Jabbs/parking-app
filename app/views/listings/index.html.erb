@@ -10,16 +10,16 @@
 			<thead>
 				<tr>
 					<th>Spot</th>
-					<th>Start Date</th>
-					<th>End Date</th>
+					<th>Start</th>
+					<th>End</th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @listings.each do |listing| %>
 				<tr>
 					<td><%= listing.spot.name %></td>
-					<td><%= listing.start_date %></td>
-					<td><%= listing.end_date %></td>
+					<td><%= listing.start_date.strftime("%m/%d") %> <%= listing.time_slot_start_hour %></td>
+					<td><%= listing.end_date.strftime("%m/%d") %> <%= listing.time_slot_end_hour %></td>
 				</tr>
 				<% end %>
 			</tbody>
