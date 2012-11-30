@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   def index
-    @listings = Listing.where("start_date >= ?", Date.today)
+    @listings = Listing.where(user_id: current_user.id).where("end_date >= ?", Date.today)
     @renthours_today = RentHour.where(date: Date.today)
     @renthours_today_1 = RentHour.where(date: (Date.today + 1))
     @renthours_today_2 = RentHour.where(date: (Date.today + 2))
@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @listings = Listing.where(user_id: current_user.id).order("start_date ASC").order("spot_id ASC")
+    @listings = Listing.where(user_id: current_user.id).where("end_date >= ?", Date.today).order("start_date ASC").order("spot_id ASC")
     @spots = current_user.spots
   end
   
@@ -57,6 +57,7 @@ class ListingsController < ApplicationController
           rh.date = date
           rh.time_slot = time_slot
           rh.spot_id = @listing.spot_id
+          rh.building_id = @listing.building_id
           rh.save!
         end
       end unless x == -1 || x == 0
@@ -67,6 +68,7 @@ class ListingsController < ApplicationController
         rh.listing_id = @listing.id
         rh.date = @listing.start_date
         rh.spot_id = @listing.spot_id
+        rh.building_id = @listing.building_id
         rh.time_slot = n - 1
         n = n - 1
         rh.save!
@@ -77,6 +79,7 @@ class ListingsController < ApplicationController
         rh = RentHour.new
         rh.listing_id = @listing.id
         rh.spot_id = @listing.spot_id
+        rh.building_id = @listing.building_id
         rh.date = @listing.end_date
         rh.time_slot = n
         rh.save!
@@ -88,6 +91,7 @@ class ListingsController < ApplicationController
           rh = RentHour.new
           rh.listing_id = @listing.id
           rh.spot_id = @listing.spot_id
+          rh.building_id = @listing.building_id
           rh.date = @listing.end_date
           rh.time_slot = v
           v = v + 1
@@ -108,8 +112,11 @@ class ListingsController < ApplicationController
   
   def destroy
     @listing = Listing.find(params[:id])
-    @listing.destroy
-    
-    redirect_to new_listing_url
+    if @listing.rent_hours.where(reserved: true).count != 0
+      redirect_to new_listing_url, alert: "Listing cannot be removed because someone has already purchased a reservation for this listing."
+    else
+      @listing.destroy
+      redirect_to new_listing_url, notice: "Your listing has been removed."
+    end
   end
 end

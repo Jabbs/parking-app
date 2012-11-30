@@ -1,9 +1,11 @@
 <div class="row">
 	<div class="hero-unit span6">
 	  <h1>ShareTheLot</h1>
-	  <p class="red">Where you can rent your neighbor's parking spot.</p>
+	  <p class="red">Rent parking spots from others in your building.</p>
 	  <p>
+		<% unless current_user %>
 			<%= button_to "Sign Up!", new_user_path, method: :get, class: "btn btn-large blue" %>
+		<% end %>
 	  </p>
 	</div>
 	<% unless current_user %>
@@ -20,7 +22,7 @@
 		<hr class="red">
 		<p class="center">
 			</br>
-			Out of town? Car in the shop? Make money by sharing your parking spot with your neighbors.
+			Out of town? Car in the shop? Make money by sharing your parking spot with others in your building.
 		</p>
 	</div>
 	<div class="span4">
@@ -28,16 +30,16 @@
 		<hr>
 		<p class="center">
 			</br>
-			Need an extra spot for a few hours? or a weekend? Don't park across the street, rent your neighbors spot.
+			Need an extra spot for a few hours? or a weekend? Don't bother with remote parking, rent a spot in your building.
 		</p>
 	</div>
 	<div class="span4">
-		<h2>Get Involved</h2>
+		<h2>Participate</h2>
 		<hr>
 		<p class="center">
 			</br>
-			Landlords and property managers please <%= link_to 'contact us', '#' %> for more information about how you can offer this
-			service to your tenants.
+			Landlords and property managers please <a href="mailto:info@sharethelot.com">contact us</a> for more information 
+			about how you can offer this service to your tenants.
 		</p>
 	</div>
 </div>

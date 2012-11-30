@@ -16,13 +16,14 @@
 	<% @search2.rent_hour_groups.each do |rh_group| %>
 	  <tr>
 			<td><%= rh_group.first.spot.name %></td>
-			<td><%= @search2.start_date.strftime("%b %e, %Y") %> <%= @search2.time_slot_start_hour %> - 
-			<%= @search2.end_date.strftime("%b %e, %Y") %> <%= @search2.time_slot_end_hour %> </td>
-			<td><%= link_to 'Add To Cart', carts_path(@cart, query: rh_group), method: :post %></td>
+			<td><%= @search2.start_date.strftime("%m/%d") %> <%= @search2.time_slot_start_hour %> - 
+			<%= @search2.end_date.strftime("%m/%d") %> <%= @search2.time_slot_end_hour %> </td>
+			<td><%= link_to 'Add To Cart', reservations_path(@cart, rh_group: rh_group, search_id: @search2, 
+																											 spot_id: rh_group.first.spot.id), method: :post %></td>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
 <% else %>
-<div class="alert alert-error">***No spots available at the selected time.***</div>
+<p class="red">***No spots available at the selected time.***</p>
 <% end %>

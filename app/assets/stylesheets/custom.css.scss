@@ -97,6 +97,11 @@ p {
   line-height: 1.3em;
 }
 
+legend {
+	margin-bottom: 10px;
+	color: $darkblue;
+}
+
 .inline li {
     display: inline;
 		margin: 0 10px;
@@ -108,6 +113,10 @@ p {
 
 .inline {
 	display: inline;
+}
+
+.no-left-margin {
+	margin-left: 0;
 }
 
 .money {
@@ -138,6 +147,15 @@ p {
 .custom-well {
 	 padding: 10px 10px 10px 10px;
 	 margin: 0 0 20px 20px;
+	 @include white_grey_gradient;
+	 border: 1px solid $darkblue;
+	 @include rounded_border;
+}
+
+.custom-well-span12 {
+	 padding: 10px 10px 10px 10px;
+	 margin: 0 0 20px 20px;
+	 width: 920px;
 	 @include white_grey_gradient;
 	 border: 1px solid $darkblue;
 	 @include rounded_border;
@@ -183,11 +201,20 @@ hr {
 
 /* Header */
 
+.building_name {
+	padding: 10px 20px;
+	float: right;
+}
+
 ul.nav li.dropdown a{
     color: $darkblue;    
 		&:hover {
 			color: $darkblue;
 		}
+}
+
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;    
 }
 
 .red-caret {

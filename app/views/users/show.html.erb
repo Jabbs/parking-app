@@ -4,9 +4,18 @@
 	<div class="custom-well span8">
 		<div class="img span2"><%= image_tag "blank_avatar.jpg" %>
 		</div>
+		<div class="span5">
 		<ul class="unstyled">
 			<li><strong><%= @user.first_name %> <%= @user.last_name %></strong></li>
 			<li><%= @user.email %></li>
+			<li><%= @user.building.name %></li>
+			<li>Parking spot(s):
+			<% if @user.leases.count != 0 %>
+				<%= @user.leases.map { |l| l.spot.name }.to_sentence %>
+			<% else %>
+				<em>none registered</em>
+			<% end %>
+			</li>
 		</ul>
 		<dl>
 			<dd>Member since: <%= @user.created_at.strftime("%b %e, %Y") %></dd>
@@ -17,5 +26,6 @@
 				<% end %>
 			</dd>
 		</dl>
+		</div>
 	</div>
 </div>

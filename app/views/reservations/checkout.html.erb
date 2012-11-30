@@ -1,0 +1,104 @@
+<div class="row">
+	<div class="span12">
+		<ul class="nav nav-tabs">
+		  <li><%= link_to 'Search', new_search_path %></li>
+		  <li><%= link_to 'Reservations', reservations_path %></li>
+			<li class="active"><a href="#">Checkout</a></li>
+		</ul>
+	</div>
+</div>
+<% if @cart %>
+<div class="row">
+	<div class="custom-well-span12">
+		<div class="span4 pull-left no-left-margin">
+			<form>
+			  <fieldset>
+			    <legend>Billing Information</legend>
+					<%= image_tag 'billing_options.jpg', size: "150x150" %></br>
+			    <label>Cardholder's name:</label>
+			    <input type="text">
+			    <label>Card number:</label>
+			    <input type="text">
+			    <label>CVV:</label>
+			    <input type="text" class="input-mini">
+					<span class="help-block">Three digit code on back of card.</span>
+					<label>Expires:</label>
+					<select class="span2">
+					  <option>1-Jan</option>
+					  <option>2-Feb</option>
+					  <option>3-Mar</option>
+					  <option>4-Apr</option>
+					  <option>5-May</option>
+					  <option>6-Jun</option>
+					  <option>7-Jul</option>
+					  <option>8-Aug</option>
+					  <option>9-Sep</option>
+					  <option>10-Oct</option>
+					  <option>11-Nov</option>
+					  <option>12-Dec</option>
+					</select>
+					<select class="span2">
+					  <option>2013</option>
+					  <option>2014</option>
+					  <option>2015</option>
+					  <option>2016</option>
+					  <option>2017</option>
+					  <option>2018</option>
+					  <option>2019</option>
+					  <option>2020</option>
+					  <option>2021</option>
+					</select>
+					<hr>
+			  </fieldset>
+			</form>
+			<%= button_to "Confirm Purchase", checkout_path(cart_id: @cart.id), class: "btn btn-large", method: :post %>
+		</div> <!-- End of cc form -->
+		<div class="span7 pull-right">
+			<% if @cart %>
+			<table class="table table-condensed">
+				<thead>
+				  <tr>
+						<th></th>
+				    <th>Spot</th>
+				    <th>Reservation</th>
+				    <th>Time</th>
+						<th></th>
+				  </tr>
+				</thead>
+				<tbody>
+				<% @cart.reservations.each do |reservation| %>
+				  <tr>
+						<td><%= link_to raw('<i class="icon-remove-sign"></i>'), reservation_path(reservation), method: :delete %></td>
+						<td><%= reservation.spot.name %></td>
+						<td><%= reservation.start_date.strftime("%m/%d") %> <%= reservation.time_slot_start_hour %> -
+						<%= reservation.end_date.strftime("%m/%d") %> <%= reservation.time_slot_end_hour %></td>
+						<td><%= pluralize(reservation.rent_hours.count, 'hr') %></td>
+						<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
+					</tr>
+					<% end %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><strong>Total:</strong></td>
+						<td class="money"><strong><%= number_to_currency(total_price(@cart.reservations)) %></strong></td>
+					</tr>
+				</tbody>
+			</table>
+			<% end %>
+			<div class="span7 pull-right">
+			<p class="red">
+				*** Please review your parking reservation(s) before your confirm your purchase. 
+				Parking reservation receipt(s) will be sent to the registered email address. They
+				may also be accessed in the <%= link_to 'Reservations', reservations_path %> section. Receipts are required 
+				by each vehicle for parking entry.***
+			</p>
+			</div>
+		</div> <!-- End Table -->
+	</div> <!-- End Custom Well -->
+</div> <!-- End Row -->
+<% else %>
+<em>You have not selected any parking spots. Please search for your desired parking dates and times 
+	<%= link_to 'here', new_search_path %>.
+</em>
+<% end %>

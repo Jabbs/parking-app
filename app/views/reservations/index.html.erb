@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="span12">
+		<ul class="nav nav-tabs">
+		  <li><%= link_to 'Search', new_search_path %></li>
+			<li class="active"><a href="#">Reservations</a></li>
+		  <li><%= link_to 'Checkout', checkout_path %></li>
+		</ul>
+	</div>
+</div>
+<% if @reservations.count != 0 %>
+<div class="row">
+	<div class="custom-well-span12">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+					<th></th>
+					<th>Building</th>
+					<th>Spot</th>
+					<th>Duration</th>
+			    <th>Start Time</th>
+			    <th>End Time</th>
+					<th></th>
+			  </tr>
+			</thead>
+			<tbody>
+			<% @reservations.each do |reservation| %>
+			  <tr>
+					<td class="blue">#100<%= reservation.id %></td>
+					<td><%= reservation.spot.building.name %></td>
+					<td><%= reservation.spot.id %></td>
+					<td><%= pluralize(reservation.rent_hours.count, 'hour') %></td>
+					<td><%= reservation.start_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_start_hour %></td>
+					<td><%= reservation.end_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_end_hour %></td>
+					<td><%= link_to 'email receipt', '#' %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+		<em>*You must present your receipt at the garage for access.</em>
+	</div>
+</div>
+<% else %>
+<em>You do not have any active reservations. Please search for your desired parking dates and times 
+	<%= link_to 'here', new_search_path %>.
+</em>
+<% end %>

@@ -1,4 +1,7 @@
 Parkingapp::Application.routes.draw do
+  
+  match '/checkout', to: 'reservations#checkout', via: :get
+  match '/checkout', to: 'reservations#purchase', via: :post
 
   controller :sessions do
     get 'login' => :new
@@ -11,7 +14,7 @@ Parkingapp::Application.routes.draw do
   resources :spots, only: [:index, :new, :edit, :create]
   resources :buildings
   resources :users, only: [:new, :create, :show]
-  resources :carts, only: [:create]
+  resources :reservations, only: [:create, :destroy, :index]
   root :to => 'sessions#new'
 
 end

@@ -1,7 +1,7 @@
 <%= form_for(@search) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.hidden_field :building_id, value: current_user.building.id %>
-<h3>When would you like to reserve parking?
+<h3>When do you need to reserve a spot?
 </h3>
 <hr>
 <div class="row">

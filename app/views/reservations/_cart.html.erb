@@ -1,0 +1,34 @@
+<% if @cart && @cart.reservations.count != 0 %>
+<table class="table table-condensed">
+	<thead>
+	  <tr>
+			<th></th>
+	    <th>Spot</th>
+	    <th>Reservation</th>
+			<th></th>
+	  </tr>
+	</thead>
+	<tbody>
+	<% @cart.reservations.each do |reservation| %>
+	  <tr>
+			<td><%= link_to raw('<i class="icon-remove-sign"></i>'), reservation_path(reservation), method: :delete %></td>
+			<td><%= reservation.spot.name %></td>
+			<td><%= reservation.start_date.strftime("%m/%d") %> <%= reservation.time_slot_start_hour %> - </br>
+			<%= reservation.end_date.strftime("%m/%d") %> <%= reservation.time_slot_end_hour %> </br>
+			(<%= pluralize(reservation.rent_hours.count, 'hour') %>) </td>
+			<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td class="money"><%= number_to_currency(total_price(@cart.reservations)) %></td>
+		</tr>
+	</tbody>
+</table>
+<%= button_to 'checkout & print receipt(s)', checkout_path, method: :get, class: "btn pull-right" %>
+<% else %>
+<em>Empty</em>
+<% end %>
+	

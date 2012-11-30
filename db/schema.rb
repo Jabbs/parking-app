@@ -11,12 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128202532) do
+ActiveRecord::Schema.define(:version => 20121130010743) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "code"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
   end
 
   create_table "cart_rent_hour_relationships", :force => true do |t|
@@ -54,16 +59,37 @@ ActiveRecord::Schema.define(:version => 20121128202532) do
 
   create_table "rent_hours", :force => true do |t|
     t.integer  "listing_id"
-    t.boolean  "reserved",   :default => false
+    t.boolean  "reserved",    :default => false
     t.integer  "renter_id"
     t.date     "date"
     t.integer  "time_slot"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "spot_id"
+    t.integer  "building_id"
   end
 
   add_index "rent_hours", ["id"], :name => "index_rent_hours_on_id"
+
+  create_table "reservation_rent_hour_relationships", :force => true do |t|
+    t.integer  "reservation_id"
+    t.integer  "rent_hour_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "reservations", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "start_time_slot"
+    t.integer  "end_time_slot"
+    t.integer  "spot_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "cart_id"
+    t.boolean  "paid",            :default => false
+  end
 
   create_table "searches", :force => true do |t|
     t.date     "end_date"

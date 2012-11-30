@@ -9,26 +9,39 @@
 			<div class="span2">
 				<label>Building:</label>
 			</div>
-			<div>
+			<div class="span3 red">
 		    <%= current_user.building.name %>
 			</div>
 		</div>
+		<% if current_user.leases.count != 0 %>
 		<div class="row">
 			<div class="span2">
-				<label>Spot:</label>
+				<label>Registered spots:</label>
 			</div>
-			<div>
+			<div class="span3">
+		    <%= current_user.leases.map { |l| l.spot.name }.to_sentence %>
+			</div>
+		</div>
+		<% end %>
+		</br>
+		<div class="row">
+			<div class="span2">
+				<label>Which spot is yours?</label>
+			</div>
+			<div class="span3">
 				<%= f.collection_select :spot_id, @spots, :id, :name, prompt: "--select--" %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span5">
+			<div class="span8">
 				<label class="checkbox">
 					<%= f.check_box(:confirmed) %>
-					I acknowledge that this is my parking spot.
+					I acknowledge that this is my parking spot and agree to the <%= link_to 'terms and conditions', '#' %>
+					of ShareTheLot.
 				</label>
 			</div>
 		</div>
+		<hr>
 		<div class="row">
 			<div class="span2">
 				<%= f.submit 'Create', class: "btn btn-custom btn-large" %>

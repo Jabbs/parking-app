@@ -3,79 +3,86 @@
   <li><%= link_to 'Reservations At My Spot', '#' %></li>
   <li><%= link_to 'Revenue', '#' %></li>
 </ul>
-<%= form_for(@listing) do |f| %>
-	<%= render 'shared/error_messages', object: f.object %>
-<div class="row">
-	<div class="custom-well">
-		<h3 class="blue">Share My Parking Spot
-		<span class="pull-right"><small>Building: </small><%= current_user.building.name %></span>	
-		</h3>
-		<hr>
-		<div class="row">
-			<div class="span1">
-				<label>Spot:</label>
+<% if current_user.leases.count != 0 %>
+	<%= form_for(@listing) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+	<div class="row">
+		<div class="custom-well span6">
+			<h3 class="blue">When is your parking spot available?</h3>
+			<hr>
+			<div class="row">
+				<div class="span2">
+					<label>Which Spot:</label>
+				</div>
+				<div class="span2 offset1">
+			    <%= f.collection_select :spot_id, @spots, :id, :name %>
+				</div>
 			</div>
-			<div class="span2">
-		    <%= f.collection_select :spot_id, @spots, :id, :name %>
+			<hr>
+			<div class="row">
+				<div class="span1">
+					<label>Start:</label>
+				</div>
+				<div class="span1">
+					<%= f.text_field :start_date, placeholder: "Date", class: "input-small" %>
+				</div>
+				<div class="span2 offset1">
+					<%= f.select :start_time_slot, Listing::TIMES  %>
+				</div>
 			</div>
+			<div class="row">
+				<div class="span1">
+					<label>End:</label>
+				</div>
+				<div class="span1">
+					 <%= f.text_field :end_date, placeholder: "Date", class: "input-small" %>
+				</div>
+				<div class="span2 offset1">
+					<%= f.select :end_time_slot, Listing::TIMES  %>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="span4 pull-left">
+					<em>*a minimum of 4 hours is required per listing</em>
+				</div>
+				<div class="span1 pull-right">
+					<%= f.submit 'Create Listing', class: "btn btn-custom btn-large pull-right" %>
+				</div>
+			</div>
+		</div> <!-- custom-well end -->
+		<div class="span5">
+			<% if @listings.count != 0 %>
+			<legend>Active Listings</legend>
+			<table class="table table-striped table-condensed">
+				<thead>
+				  <tr>
+				    <th>Spot</th>
+				    <th>Listing</th>
+				    <th></th>
+				  </tr>
+				</thead>
+				<tbody>
+				<% @listings.each do |listing| %>
+				  <tr>
+						<td><%= listing.spot.name %></td>
+						<td><%= listing.start_date.strftime("%m/%d") %> <%= listing.time_slot_start_hour %> -
+								<%= listing.end_date.strftime("%m/%d") %> <%= listing.time_slot_end_hour %>
+						</td>
+						<td><%= link_to 'Remove', listing_path(listing), method: :delete, confirm: "Are you sure?" %></td>
+					</tr>
+				<% end %>
+				</tbody>
+			</table>
+			<% else %>
+				<em>You do not have any active listings. Please remember to share your parking spot when its available
+					to make some extra cash.
+				</em>
+			<% end %>
 		</div>
-		<hr>
-		<div class="row">
-			<div class="span1">
-				<label>Start:</label>
-			</div>
-			<div class="span2">
-				<%= f.text_field :start_date, placeholder: "Date" %>
-			</div>
-			<div class="span2 offset1">
-				<%= f.select :start_time_slot, Listing::TIMES  %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span1">
-				<label>End:</label>
-			</div>
-			<div class="span2">
-				 <%= f.text_field :end_date, placeholder: "Date" %>
-			</div>
-			<div class="span2 offset1">
-				<%= f.select :end_time_slot, Listing::TIMES  %>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="span10 pull-left">
-				<p>*spots are listed at <span class="money">$3</span> per hour up to <span class="money">$10</span> 
-					if under 8 hours. Anything over 8 hours will be <span class="money">$20</span> per day.</p>
-				<p>*a minimum of 4 hours is required per listing</p>
-			</div>
-			<div class="span1 pull-right">
-				<%= f.submit 'Create Listing', class: "btn btn-custom btn-large pull-right" %>
-			</div>
-		</div>
-	</div>
-</div>
-<% end %>
-
-<% if current_user.searches.count != 0 %>
-
-<table class="table table-striped table-condensed">
-	<thead>
-	  <tr>
-	    <th>Spot</th>
-	    <th>Start</th>
-	    <th>End</th>
-	  </tr>
-	</thead>
-	<tbody>
-	<% @listings.each do |listing| %>
-	  <tr>
-			<td><%= listing.spot.name %></td>
-			<td><%= listing.time_slot_start_hour %>, <%= listing.start_date.strftime("%b %e, %Y") %></td>
-			<td><%= listing.time_slot_end_hour %>, <%= listing.end_date.strftime("%b %e, %Y") %></td>
-			<td><%= link_to 'Remove', listing_path(listing), method: :delete, confirm: "Are you sure?" %></td>
-		</tr>
+	</div> <!-- End row -->
 	<% end %>
-	</tbody>
-</table>
+<% else %>
+<em>You cannot list a parking spot until it is registered. You can register your spot(s)
+			 <%= link_to 'here', new_lease_path %>.</em>
 <% end %>

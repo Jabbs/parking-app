@@ -62,7 +62,7 @@ class Search < ActiveRecord::Base
   private
 
   def find_rent_hours
-    rent_hours = RentHour.where(:date => (start_date..end_date)).where(reserved: false).order("spot_id ASC").order("date ASC").order("time_slot ASC")
+    rent_hours = RentHour.where(building_id: building_id).where(:date => (start_date..end_date)).where(reserved: false).order("spot_id ASC").order("date ASC").order("time_slot ASC")
     
     unwanted_start_hours = RentHour.where(date: start_date).where(:time_slot => (0...start_time_slot)) unless start_date == end_date
     unwanted_end_hours = RentHour.where(date: end_date).where(:time_slot => (end_time_slot..23)) unless start_date == end_date
@@ -89,9 +89,15 @@ class Search < ActiveRecord::Base
     
     rent_hour_groups2 = []
     
-    if Cart.where(user_id: user_id).last
+    if Cart.where(user_id: user_id).last.present?
       rent_hour_groups.each do |rh_group|
-        rent_hour_groups2 << rh_group unless Cart.where(user_id: user_id).last.rent_hours.find_by_id(rh_group.first)
+        x = 0
+        rh_group.each do |rh|
+          x = 1 if Cart.where(user_id: user_id).last.rent_hours.find_by_id(rh.id).present?
+        end
+        unless x == 1
+          rent_hour_groups2 << rh_group
+        end
       end
     else
       rent_hour_groups2 = rent_hour_groups

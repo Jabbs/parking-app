@@ -2,25 +2,22 @@
 	<div class="span7">
 			<ul class="nav nav-tabs">
 			  <li class="active"><a href="#">Search</a></li>
-			  <li><%= link_to 'All Listings', listings_path %></li>
-			  <li><%= link_to 'Reservations', '#' %></li>
-			  <li><%= link_to 'Checkout', '#' %></li>
+			  <li><%= link_to 'Reservations', reservations_path %></li>
+			  <li><%= link_to 'Checkout', checkout_path %></li>
 			</ul>
 		<div class="custom-well-no-left-padding span7">
 			<%= render 'form' %>
 		</div>
+
+			<%= render 'search_results' %>
+
 	</div>
 	<div class="span5">
 		<div class="custom-well span4 pull-right">
 			<h3>Cart</h3>
 			<hr>
-			<%= render 'carts/cart' %>
+			<%= render 'reservations/cart' %>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="span12">
-		<%= render 'search_results' %>
 	</div>
 </div>
 
