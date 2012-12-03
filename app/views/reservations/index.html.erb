@@ -15,10 +15,12 @@
 			  <tr>
 					<th></th>
 					<th>Building</th>
+					<th>Address</th>
 					<th>Spot</th>
 					<th>Duration</th>
 			    <th>Start Time</th>
 			    <th>End Time</th>
+					<th></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -26,10 +28,14 @@
 			  <tr>
 					<td class="blue"><%= link_to "#100#{reservation.id}", reservation_path(reservation) %></td>
 					<td><%= reservation.spot.building.name %></td>
+					<td><%= reservation.spot.building.address %> </br> <%= reservation.spot.building.city %>, 
+							<%= reservation.spot.building.state %> <%= reservation.spot.building.zip_code %></td>
 					<td><%= reservation.spot.id %></td>
 					<td><%= pluralize(reservation.rent_hours.count, 'hour') %></td>
 					<td><%= reservation.start_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_start_hour %></td>
 					<td><%= reservation.end_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_end_hour %></td>
+					<td><i class="icon-print"></i> <%= link_to 'Print', '#' %> | 
+							<i class="icon-envelope"></i> <%= link_to 'Email', '#' %></td>
 				</tr>
 			<% end %>
 			</tbody>

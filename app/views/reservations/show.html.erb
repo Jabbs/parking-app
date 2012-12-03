@@ -8,8 +8,41 @@
 	</div>
 </div>
 <div class="row">
-	<div class="custom-well-span12">
-		<%= link_to 'Reservations', reservations_path %> / <%= "#100#{@reservation.id}" %>
-		<%= link_to raw('<i class="icon-print"></i> Print'), '#', class: "pull-right" %>
+	<div class="custom-well span9">
+		<div class="row">
+			<div class="span3 pull-left">
+				<%= link_to 'Reservations', reservations_path %> / <%= "#100#{@reservation.id}" %>
+			</div>
+			<div class="span2 pull-right">
+				<%= link_to raw('<i class="icon-print"></i> Print'), '#', class: "pull-right" %>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="span3 pull-left">
+				<%= image_tag("#{@reservation.spot.building.image}", size: "100x100") %></br>
+				<strong>Location:</strong></br>
+				<%= @reservation.spot.building.name %></br>
+				<%= @reservation.spot.building.address %> </br> <%= @reservation.spot.building.city %>, 
+				<%= @reservation.spot.building.state %> <%= @reservation.spot.building.zip_code %></br>
+				<strong>Spot: <span class="blue"><%= @reservation.spot.name %></span></strong></br>
+			</div>
+			<div class="span5 pull-right">
+				<h4 class="blue">
+					<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
+					<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
+				</h4>
+					(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
+					</br></br>
+				<strong>Confirmation Number: <span class="red"><%= @reservation.confirmation_number %></span></strong></br></br>
+				<strong>Garage Instructions:</strong></br>
+				<p>
+					<em>
+					<%= @reservation.spot.building.garage_instructions %>
+					</em>
+				</p>
+			</div>
+		</div> <!-- End of row -->
+		<hr>
 	</div>
 </div>

@@ -7,12 +7,18 @@ namespace :db do
 end
 
 def make_building
+  Building.create!(name:       "The Regatta",
+                   address:    "420 East Waterside Drive",
+                   city:       "Chicago",
+                   state:      "IL",
+                   zip_code:   "60601",
+                   code:    "123456")
   10.times do
     type = ["Condominiums", "Apartments", "Apartment Complex", "Building", "Complex"]
     name  = Faker::Company.name + " #{type.shuffle.first}"
     address = Faker::Address.street_address
     city = Faker::Address.city
-    state = Faker::Address.state
+    state = Faker::Address.state_abbr
     zip_code = Faker::Address.zip_code
     code = "123456"
     Building.create!(name:       name,

@@ -11,17 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202222236) do
+ActiveRecord::Schema.define(:version => 20121203205126) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "code"
     t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
+    t.string   "image"
+    t.text     "garage_instructions"
   end
 
   create_table "cart_rent_hour_relationships", :force => true do |t|
@@ -85,11 +87,12 @@ ActiveRecord::Schema.define(:version => 20121202222236) do
     t.integer  "end_time_slot"
     t.integer  "spot_id"
     t.integer  "user_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "cart_id"
-    t.boolean  "paid",            :default => false
+    t.boolean  "paid",                :default => false
     t.integer  "owner_id"
+    t.string   "confirmation_number"
   end
 
   create_table "searches", :force => true do |t|

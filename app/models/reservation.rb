@@ -1,5 +1,5 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :end_date, :end_time_slot, :spot_id, :start_date, :start_time_slot, :user_id, :cart_id, :owner_id
+  attr_accessible :end_date, :end_time_slot, :spot_id, :start_date, :start_time_slot, :user_id, :cart_id, :owner_id, :confirmation_number
   has_many :reservation_rent_hour_relationships, dependent: :destroy
   has_many :rent_hours, through: :reservation_rent_hour_relationships
   belongs_to :cart
