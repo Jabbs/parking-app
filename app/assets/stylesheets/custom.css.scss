@@ -64,6 +64,7 @@ html {
 body {
 	margin-top: 60px;
 	@include white_grey_gradient;
+	height: 900px;
 }
 
 /* typography */
@@ -110,6 +111,10 @@ legend {
 
 .center {
 	text-align: center;
+}
+
+.center-vertical {
+	vertical-align: middle;
 }
 
 .inline {
@@ -162,12 +167,31 @@ legend {
 	 @include rounded_border;
 }
 
+.home-well-span12 {
+	 padding: 10px 10px 10px 10px;
+	 margin: 0 0 20px 20px;
+	 width: 920px;
+	 background: $darkblue;
+	 @include rounded_border;
+			h2 {
+				
+			}
+}
+
+.big-left-margin {
+	margin-left: 60px;
+}
+
 .custom-well-no-left-padding {
 	 padding: 10px 10px 10px 10px;
 	 margin: 0 0 20px 0;
 	 @include white_grey_gradient;
 	 border: 1px solid $darkblue;
 	 @include rounded_border;
+}
+
+.well-red {
+	background: $darkred;
 }
 
 .home-page-well {
@@ -187,8 +211,13 @@ legend {
 }
 
 .hero-unit {
-	background-image:url('chicago-parking-garage.jpg');
-	border: 1px solid $darkblue;
+		background-image:url('chicago-parking-garage.jpg');
+					 -webkit-border-radius: 5px;
+					    -moz-border-radius: 5px;
+					         border-radius: 5px;
+		 -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+		    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+		         box-shadow: 0 1px 2px rgba(0,0,0,.3);
 	h1 {
 		color: white;
 		font-size: 3em;
@@ -199,6 +228,10 @@ legend {
 }
 
 /* Forms */
+
+.form-center-well {
+	margin-top: 40px;
+}
 
 .email-input {
 		width: 160px;

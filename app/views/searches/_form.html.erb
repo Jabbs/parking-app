@@ -1,48 +1,36 @@
 <%= form_for(@search) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.hidden_field :building_id, value: current_user.building.id %>
-<h3>When do you need to reserve a spot?
+<h3>When do you need to RESERVE a spot?
 </h3>
 <hr>
 <div class="row">
-	<div class="span1">
-		<label>Start:</label>
+	<div class="span2 well well-red big-left-margin">
+		<div class="span1">
+			<% if @search2 %>
+				<%= f.text_field :start_date, placeholder: "Date", value: @search2.start_date, class: "input-small" %>
+				<%= f.select :start_time_slot, Listing::TIMES, { selected: @search2.start_time_slot }, class: "input-small" %>
+			<% else %>
+				<%= f.text_field :start_date, placeholder: "Date", class: "input-small" %>
+				<%= f.select :start_time_slot, Listing::TIMES, {}, class: "input-small" %>
+			<% end %>
+		</div>
 	</div>
-	<div class="span1">
-		<% if @search2 %>
-		<%= f.text_field :start_date, placeholder: "Date", value: @search2.start_date, class: "input-small" %>
-		<% else %>
-		<%= f.text_field :start_date, placeholder: "Date", class: "input-small" %>
-		<% end %>
+	<div class="span1 center form-center-well">
+		<h3>---to---</h3>
 	</div>
-	<div class="span2 offset1">
-		<% if @search2 %>
-		<%= f.select :start_time_slot, Listing::TIMES, selected: @search2.start_time_slot %>
-		<% else %>
-		<%= f.select :start_time_slot, Listing::TIMES %>
-		<% end %>
-	</div>
-</div>
-<div class="row">
-	<div class="span1">
-		<label>End:</label>
-	</div>
-	<div class="span1">
-		<% if @search2 %>
-		<%= f.text_field :end_date, placeholder: "Date", value: @search2.end_date, class: "input-small" %>
-		<% else %>
-		<%= f.text_field :end_date, placeholder: "Date", class: "input-small" %>
-		<% end %>
-	</div>
-	<div class="span2 offset1">
-		<% if @search2 %>
-		<%= f.select :end_time_slot, Listing::TIMES, selected: @search2.end_time_slot %>
-		<% else %>
-		<%= f.select :end_time_slot, Listing::TIMES %>
-		<% end %>
+	<div class="span2 well well-red">
+		<div class="span1">
+			<% if @search2 %>
+				<%= f.text_field :end_date, placeholder: "Date", value: @search2.end_date, class: "input-small" %>
+				<%= f.select :end_time_slot, Listing::TIMES, { selected: @search2.end_time_slot }, class: "input-small" %>
+			<% else %>
+				<%= f.text_field :end_date, placeholder: "Date", class: "input-small" %>
+				<%= f.select :end_time_slot, Listing::TIMES, {}, class: "input-small" %>
+			<% end %>
+		</div>
 	</div>
 </div>
-<hr>
 <div class="row">
 	<div class="span5 pull-left">
 		<p>*spots are <span class="money">$3</span> per hour up to <span class="money">$10</span> 

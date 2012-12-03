@@ -1,0 +1,39 @@
+<ul class="nav nav-tabs">
+  <li><%= link_to 'My Listings', new_listing_path %></li>
+	<li class="active"><a href="#">Reservations At My Spot</a></li>
+  <li><%= link_to 'Revenue', '#' %></li>
+</ul>
+
+<% if @reservations.count != 0 %>
+<div class="row">
+	<div class="custom-well-span12">
+		<table class="table table-striped table-condensed table-hover">
+			<thead>
+			  <tr>
+					<th></th>
+					<th>Spot</th>
+					<th>Duration</th>
+			    <th>Start Time</th>
+			    <th>End Time</th>
+					<th>Amount</th>
+			  </tr>
+			</thead>
+			<tbody>
+			<% @reservations.each do |reservation| %>
+			  <tr>
+					<td>#100<%= reservation.id %></td>
+					<td><%= reservation.spot.id %></td>
+					<td><%= pluralize(reservation.rent_hours.count, 'hour') %></td>
+					<td><%= reservation.start_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_start_hour %></td>
+					<td><%= reservation.end_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_end_hour %></td>
+					<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<% else %>
+<em>No reservations at your spot(s) right now.
+</em>
+<% end %>

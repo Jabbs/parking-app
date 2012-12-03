@@ -2,6 +2,7 @@ Parkingapp::Application.routes.draw do
   
   match '/checkout', to: 'reservations#checkout', via: :get
   match '/checkout', to: 'reservations#purchase', via: :post
+  match '/reservations_at_my_spot', to: 'listings#index2', via: :get
 
   controller :sessions do
     get 'login' => :new

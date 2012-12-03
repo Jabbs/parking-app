@@ -12,7 +12,8 @@ class ReservationsController < ApplicationController
     end
     search = Search.find_by_id(params[:search_id])
     @reservation = Reservation.create!(start_date: search.start_date, end_date: search.end_date, start_time_slot: search.start_time_slot,
-                       end_time_slot: search.end_time_slot, spot_id: params[:spot_id], user_id: search.user_id, cart_id: @cart.id)
+                       end_time_slot: search.end_time_slot, spot_id: params[:spot_id], user_id: search.user_id, cart_id: @cart.id,
+                       owner_id: Lease.find_by_spot_id(params[:spot_id]).user_id)
     rh_id_group = params[:rh_group]
     rh_id_group.each do |rh_id|
       ReservationRentHourRelationship.create!(reservation_id: @reservation.id, rent_hour_id: rh_id)

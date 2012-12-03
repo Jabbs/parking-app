@@ -9,6 +9,10 @@ class ListingsController < ApplicationController
     @renthours_today_5 = RentHour.where(date: (Date.today + 5))
     @renthours_today_6 = RentHour.where(date: (Date.today + 6))
   end
+  
+  def index2
+    @reservations = Reservation.where(owner_id: current_user.id).where(paid: true).where("end_date >= ?", Date.today).order("start_time_slot ASC").order("start_date ASC")
+  end
 
   def show
   end

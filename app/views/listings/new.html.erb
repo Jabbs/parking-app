@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
   <li class="active"><a href="#">My Listings</a></li>
-  <li><%= link_to 'Reservations At My Spot', '#' %></li>
+  <li><%= link_to 'Reservations At My Spot', reservations_at_my_spot_path %></li>
   <li><%= link_to 'Revenue', '#' %></li>
 </ul>
 <% if current_user.leases.count != 0 %>
@@ -8,37 +8,31 @@
 		<%= render 'shared/error_messages', object: f.object %>
 	<div class="row">
 		<div class="custom-well span6">
-			<h3 class="blue">When is your parking spot available?</h3>
+			<h3 class="blue">When would you like to SHARE your spot?</h3>
 			<hr>
 			<div class="row">
 				<div class="span2">
-					<label>Which Spot:</label>
-				</div>
-				<div class="span2 offset1">
-			    <%= f.collection_select :spot_id, @spots, :id, :name %>
+					<label>Which Spot?</label>
+
+			    <%= f.collection_select :spot_id, @spots, :id, :name, {}, class: "input-small" %>
 				</div>
 			</div>
 			<hr>
 			<div class="row">
-				<div class="span1">
-					<label>Start:</label>
-				</div>
+				<div class="span2 well well-red">
 				<div class="span1">
 					<%= f.text_field :start_date, placeholder: "Date", class: "input-small" %>
+					<%= f.select :start_time_slot, Listing::TIMES, {}, class: "input-small"  %>
 				</div>
-				<div class="span2 offset1">
-					<%= f.select :start_time_slot, Listing::TIMES  %>
 				</div>
-			</div>
-			<div class="row">
-				<div class="span1">
-					<label>End:</label>
+				<div class="span1 center form-center-well">
+					<h3>---to---</h3>
 				</div>
+				<div class="span2 well well-red">
 				<div class="span1">
 					 <%= f.text_field :end_date, placeholder: "Date", class: "input-small" %>
+					<%= f.select :end_time_slot, Listing::TIMES, {}, class: "input-small"  %>
 				</div>
-				<div class="span2 offset1">
-					<%= f.select :end_time_slot, Listing::TIMES  %>
 				</div>
 			</div>
 			<hr>
