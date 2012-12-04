@@ -129,6 +129,13 @@ legend {
 	color: green;
 }
 
+.front {
+	font-size: 2.2em;
+	color: $darkred;
+	float: left;
+	font-family: "Arial",Verdana,Sans-serif;
+}
+
 .blue {
 	color: $darkblue;
 }
@@ -265,6 +272,10 @@ hr {
 	margin-right: 10px;
 }
 
+/* Front Page */
+
+
+
 /* Header */
 
 .building_name {
@@ -306,6 +317,14 @@ header {
 					}
 				}
 			}
+			li.static {
+				a {
+					color: $darkgrey;
+					&:hover {
+						color: black;
+					}
+				}
+			}
 			li.on {
 				background: $darkblue;
 				a {
@@ -341,6 +360,7 @@ footer {
     color: $gray;
     &:hover { 
       background-color: inherit;
+			text-decoration: none;
 			color: black;
     }
   }  

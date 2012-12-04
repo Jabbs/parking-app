@@ -22,12 +22,12 @@
 		<tr>
 			<td></td>
 			<td></td>
-			<td></td>
+			<td>Total:</td>
 			<td class="money"><%= number_to_currency(total_price(@cart.reservations)) %></td>
 		</tr>
 	</tbody>
 </table>
-<%= button_to 'checkout & print receipt(s)', checkout_path, method: :get, class: "btn pull-right" %>
+<%= button_to 'checkout', checkout_path, method: :get, class: "btn pull-right" %>
 <% else %>
 <em>Empty</em>
 <% end %>

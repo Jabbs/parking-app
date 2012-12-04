@@ -15,6 +15,27 @@ Parkingapp::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
+  
+  # Send out mailers when .delivery is invoked
+  config.action_mailer.perform_deliveries = true
+  
+  # Gmail mailer configuration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'localhost:3000',
+    :user_name            => 'info@sharethelot.com',
+    :password             => 'Jabbs@work1',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+    
+  # Set the default host option for mailer
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  
+  # Intercept emails in development mode and send to myself
+  # require 'development_mail_interceptor'
+  # ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

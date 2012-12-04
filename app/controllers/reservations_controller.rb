@@ -41,6 +41,10 @@ class ReservationsController < ApplicationController
       rh.reserved = true
       rh.save
     end
+    @user = current_user
+    @cart.reservations.each do |reservation|
+      UserMailer.reservation_email(@user, reservation).deliver
+    end
     @cart.destroy
     redirect_to reservations_url, notice: "Your payment has been processed. Confirmation and parking reservation(s) have
     sent to your email."

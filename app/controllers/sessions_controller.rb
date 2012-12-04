@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @buildings = Building.order("name ASC")
   end
 
   def create

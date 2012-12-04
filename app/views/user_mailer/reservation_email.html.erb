@@ -1,0 +1,19 @@
+<strong>Location:</strong></br>
+<%= @reservation.spot.building.name %></br>
+<%= @reservation.spot.building.address %> </br> <%= @reservation.spot.building.city %>, 
+<%= @reservation.spot.building.state %> <%= @reservation.spot.building.zip_code %></br>
+<strong>Spot: <span class="blue"><%= @reservation.spot.name %></span></strong>
+</br>
+</br>
+<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
+<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
+
+	(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
+	</br></br>
+<strong>Confirmation Number: <span class="red"><%= @reservation.confirmation_number %></span></strong></br></br>
+<strong>Garage Instructions:</strong></br>
+<p>
+	<em>
+	<%= @reservation.spot.building.garage_instructions %>
+	</em>
+</p>

@@ -17,8 +17,7 @@ class UsersController < ApplicationController
       redirect_to new_user_url, alert: "Building code is incorrect." 
     elsif @user.save
       sign_in @user
-      # @user.send_verification_email
-      # UserMailer.welcome_email(@user).deliver
+      @user.send_verification_email
       redirect_to new_search_url, notice: "Welcome #{@user.first_name} #{@user.last_name}! A verification email has been sent to 
                                      your email."
     else

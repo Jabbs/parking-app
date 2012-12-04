@@ -1,0 +1,5 @@
+<p><%= @user.first_name %> <%= @user.last_name %>,</p>
+
+<p>Please click on the following link to verify your ShareTheLot account:</p>
+
+<p><%= link_to "#{verification_url(@user.verification_token)}", verification_url(@user.verification_token) %></p>

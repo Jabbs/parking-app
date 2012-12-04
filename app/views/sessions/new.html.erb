@@ -13,8 +13,29 @@
 	</div>
 	<% end %>
 </div>
-<hr>
+<div class="row">
+	<div class="span12">
+		<h2 class="front">Participating Buildings:</h2>
+	</div>
+</div>
 </br>
+<div class="row">
+	<div class="span11">
+		<ul class="unstyled">
+		<% @buildings.each do |building| %>
+		<div class="span5 pull-left">
+			<li><%= link_to "#{building.name}", building_path(building) %></li>
+		</div>
+		<% end %>
+		<div class="span12">
+			<li>_________________</li>
+			<li><em>Learn how you can offer this service to your tenants <%= link_to 'here', '#' %>.</em></li>
+		</div>
+		</ul>
+	</div>
+</div>
+</br>
+
 <div class="row">
 	<div class="span4">
 		<h2>Share Your Spot</h2>
