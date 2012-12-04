@@ -13,6 +13,7 @@ def make_building
                    state:      "IL",
                    zip_code:   "60601",
                    code:       "123456",
+                   approved:   true,
                    image:      "the_regatta.jpg",
                    garage_instructions: "Designed by the firm of DeStefano + Associates, the 44-story tower's dual 
                                 elliptical glass curtain walls dramatically encircle the building, reflecting the 

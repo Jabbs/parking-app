@@ -15,7 +15,7 @@
 </div>
 <div class="row">
 	<div class="span12">
-		<h2 class="front">Participating Buildings:</h2>
+		<h2 class="front pull-left">Participating Buildings:</h2>
 	</div>
 </div>
 </br>
@@ -28,38 +28,70 @@
 		</div>
 		<% end %>
 		<div class="span12">
-			<li>_________________</li>
-			<li><em>Learn how you can offer this service to your tenants <%= link_to 'here', '#' %>.</em></li>
+			</br>
+			<li><em>Landlord or property manager? Learn how to <%= link_to 'enroll', new_building_path %> you building.</em></li>
 		</div>
 		</ul>
 	</div>
 </div>
 </br>
+<hr>
+</br>
+<div class="row">
+	<div class="well well-blue">
+		<h2 id="hows_it_work" class="front white">How does it work?</h2>
+	</div>
+</div>
 
 <div class="row">
-	<div class="span4">
-		<h2>Share Your Spot</h2>
-		<hr class="red">
-		<p class="center">
-			</br>
-			Not using your parking spot? Make money by sharing your spot with others.
-		</p>
-	</div>
-	<div class="span4">
-		<h2>Reserve A Spot</h2>
-		<hr>
-		<p class="center">
-			</br>
-			Need an extra spot for a few hours? or a weekend? Don't bother with remote parking, rent a spot in your building.
-		</p>
-	</div>
-	<div class="span4">
-		<h2>Participate</h2>
-		<hr>
-		<p class="center">
-			</br>
-			Landlords and property managers please <a href="mailto:info@sharethelot.com">contact us</a> for more information 
-			about how you can offer this service to your tenants.
-		</p>
-	</div>
+		<ol>
+			<div class="home-well">
+				<li class="bigger">
+				<%= link_to "Sign up", new_user_path %> using your 6-digit building code.
+				</li>
+				<p>If your building does not participate then please have them <a href="mailto:info@sharethelot.com">contact us</a>.</p>
+			</div>
+			
+			<h1>Share parking:</h1>
+			<div class="home-well">
+				<li class="bigger">
+				 	Verify your parking spot(s).
+				</li>
+				<p>Select the parking spot(s) assigned to you.</p>
+			</div>
+			<div class="home-well">
+				<li class="bigger">
+				 	Add listings when your parking spot is vacant.
+				</li>
+				<p>Listings must be a minimum of 4 hours in length.</p>
+			</div>
+			<div class="home-well">
+				<li class="bigger">
+				 	Earn <span class="money">money</span> when others use your spot.
+				</li>
+				<p>Spots are listed at $3 per hour up to $10, anything over 8 hours is charged at $20 per day.
+					 ShareTheLot takes 15% and sends checks via mail every 60 days.
+				</p>
+			</div>
+			<h1>Reserve parking:</h1>
+			<div class="home-well">
+				<li class="bigger">
+				 	Search for parking.
+				</li>
+				<p>Choose the dates and times you would like to reserve a spot from one of your neighbors.</p>
+			</div>
+			<div class="home-well">
+				<li class="bigger">
+				 	Checkout and print parking passes.
+				</li>
+				<p>All parking spots are charges at $3 per hour up to $10, anything over 8 hours is $20 per day.
+					 You parking passes are sent by email or may be printed online.</p>
+			</div>
+			<div class="home-well">
+				<li class="bigger">
+				 	Park at your reserved spot and time.
+				</li>
+				<p>Use your parking pass to access the garage. Parking instructions are also included on the receipt.</p>
+			</div>
+		</ol>
 </div>

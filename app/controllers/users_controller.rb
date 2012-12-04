@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @buildings = Building.all
+    @buildings = Building.where(approved: true).order("name ASC")
   end
   
   def create

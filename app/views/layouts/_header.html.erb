@@ -1,5 +1,5 @@
 <header>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse">
 	  <div class="navbar-inner">
 	    <div class="container">
 	      <%= link_to raw('<strong>ShareThe<span class="red">Lot</span></strong>'), root_url, id: 'logo', class: 'brand' %>
@@ -34,6 +34,11 @@
           </li>
         </ul>
 				<div class="building_name">Building: <strong class="red"><%= current_user.building.name %></strong></div>
+				<% else %>
+				<h2 class="tag_in_nav">#sharing</h2>
+				<h2 class="tag_in_nav">#parking</h2>
+				<h2 class="tag_in_nav">#garage</h2>
+				<h2 class="tag_in_nav">#chicago</h2>
 				<% end %>
 	    </div>
 	  </div>

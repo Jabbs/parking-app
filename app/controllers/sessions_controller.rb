@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    @buildings = Building.order("name ASC")
+    @buildings = Building.where(approved: true).order("name ASC")
   end
 
   def create

@@ -4,6 +4,22 @@
 <hr>
 <div class="row">
 	<div class="span2">
+		<label>Building: <span class="red">*</span></label>
+	</div>
+	<div class="span2">
+		 <%= f.collection_select :building_id, @buildings, :id, :name, prompt: "--select--" %>
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label>6-Digit Building Code: <span class="red">*</span></label>
+	</div>
+	<div class="span2">
+		<input name="building_code" class="span1" type="text">
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
 		<label>Name: <span class="red">*</span></label>
 	</div>
 	<div class="span2">
@@ -19,24 +35,6 @@
 		 <%= f.email_field :email, class: "span3", placeholder: "Email" %>
 	</div>
 </div>
-<div class="row">
-	<div class="span2">
-		<label>Building: <span class="red">*</span></label>
-	</div>
-	<div class="span2">
-		 <%= f.collection_select :building_id, @buildings, :id, :name, prompt: "--select--" %>
-	</div>
-</div>
-<div class="row">
-	<div class="span2">
-		<label>6-Digit Building Code: <span class="red">*</span></label>
-	</div>
-	<div class="span2">
-		<input name="building_code" class="span1" type="text">
-		<p class="inline"><small> (<%= link_to 'What\'s this?', '#' %>)</small></p>
-	</div>
-</div>
-
 <h3 class="blue">Password</h3>
 <hr>
 <div class="row">
@@ -59,6 +57,9 @@
 <div class="row">
 	<div class="span2">
 		<%= f.submit 'Create account', class: "btn btn-custom btn-large" %>
+	</div>
+	<div class="span3 pull-right">
+		<p class="pull-right"><small>Looking for <%= link_to 'Building Sign Up', new_building_path %>?</small></p>
 	</div>
 </div>
 <% end %>

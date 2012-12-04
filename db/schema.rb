@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203205126) do
+ActiveRecord::Schema.define(:version => 20121204224413) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "code"
     t.string   "address"
     t.string   "city"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20121203205126) do
     t.string   "zip_code"
     t.string   "image"
     t.text     "garage_instructions"
+    t.boolean  "approved",            :default => false
+    t.string   "website"
   end
 
   create_table "cart_rent_hour_relationships", :force => true do |t|
