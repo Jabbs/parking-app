@@ -3,12 +3,14 @@ $navbarBorder: none;
 
 /* mixins, variables, etc. */
 $grayMediumLight: #eaeaea;
+$grayMediumDark: #DFDFDF;
 $darkblue: #1E37A0;
 $yellow: #DFA414;
 $grey: #E9E9E9;
 $darkgrey: #656565;
 $red: #C30202;
 $darkred: #A10101;
+$lightblue: #2D56FF;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box; 
@@ -392,11 +394,13 @@ header {
 
 footer {
   margin-top: 45px;
+	height: 150px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  border-top: 1px solid $darkgrey;
+  color: $darkgrey;
+	background: $grayMediumDark;
   a {
-    color: $gray;
+    color: $darkgrey;
     &:hover { 
       background-color: inherit;
 			text-decoration: none;
@@ -409,9 +413,12 @@ footer {
   ul {
     float: right;
     list-style: none;
+		margin-left: 80px;
+		width: 130px;
     li {
-      float: left;
-      margin-left: 10px;
     }
+		.title {
+			margin-bottom: 6px;
+		}
   }
 }

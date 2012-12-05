@@ -1,0 +1,75 @@
+<%= form_for(@building) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+<h3 class="blue">Building information</h3>
+<hr>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Building Name:</label>
+	</div>
+	<div class="span2">
+		 <%= f.text_field :name, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Address:</label>
+	</div>
+	<div class="span2">
+		 <%= f.text_field :address, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">City:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :city, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">State:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :state, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Zip Code:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :zip_code, class: "span3" %> 
+	</div>
+</div>
+<h3 class="blue">Contact information</h3>
+<hr>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Name:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :contact_name, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Email:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :contact_email, class: "span3" %> 
+	</div>
+</div>
+<div class="row">
+	<div class="span2">
+		<label class="pull-right">Phone:</label>
+	</div>
+	<div class="span2">
+		<%= f.text_field :contact_phone, class: "span3" %> 
+	</div>
+</div>
+<hr>
+<div class="row">
+	<%= f.submit 'Submit', class: "btn btn-custom btn-large pull-right" %>
+</div>
+<% end %>

@@ -17,4 +17,9 @@ class UserMailer < ActionMailer::Base
     mail(to: "#{user.first_name} #{user.last_name} <#{user.email}>", subject: "ShareTheLot - Parking Receipt", 
     from: "orders@sharethelot.com")
   end
+  
+  def new_building_admin_email(building)
+    @building = building
+    mail(to: "info@sharethelot.com", subject: "ShareTheLot - NEW BUILDING")
+  end
 end

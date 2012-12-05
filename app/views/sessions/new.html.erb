@@ -24,7 +24,7 @@
 		<ul class="unstyled">
 		<% @buildings.each do |building| %>
 		<div class="span5 pull-left">
-			<li><%= link_to "#{building.name}", building_path(building) %></li>
+			<li><%= link_to "#{building.name}", building_path(building) %> (<%= building.city %>, <%= building.state %>)</li>
 		</div>
 		<% end %>
 		<div class="span12">
@@ -49,9 +49,8 @@
 				<li class="bigger">
 				<%= link_to "Sign up", new_user_path %> using your 6-digit building code.
 				</li>
-				<p>If your building does not participate then please have them <a href="mailto:info@sharethelot.com">contact us</a>.</p>
+				<p>Building codes are given to participating buildings. Please contact your building's management if you've lost your code.</p>
 			</div>
-			
 			<h1>Share parking:</h1>
 			<div class="home-well">
 				<li class="bigger">
@@ -73,7 +72,7 @@
 					 ShareTheLot takes 15% and sends checks via mail every 60 days.
 				</p>
 			</div>
-			<h1>Reserve parking:</h1>
+			<h1 class="red">Reserve parking:</h1>
 			<div class="home-well">
 				<li class="bigger">
 				 	Search for parking.

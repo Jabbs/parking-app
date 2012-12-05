@@ -1,15 +1,21 @@
 <footer class="footer">
-  <small>
-  	© ShareTheLot 2012
-  </small>
-  <nav>
-    <ul>
-			<li><a href="#hows_it_work" title="How does it work?">How does it work?</a></li>
-			<li><%= link_to "Building Sign Up", new_building_path %></li>
-			<li><%= link_to "FAQ", '#' %></li>
-      <li><%= link_to "About Us", '#' %></li>
-      <li><%= link_to "Terms", '#' %></li>
-      <li><%= link_to "Contact Us", '#' %></li>
-    </ul>
-  </nav>
+	<div class="container">
+		<small>
+	  	© ShareTheLot 2012
+	  </small>
+	  <nav>
+			<ul>
+				<li class="title"><strong>Legal Stuff</strong></li>
+				<li><%= link_to "Terms of Use", '#' %></li>
+			</ul>
+			<ul>
+				<li class="title"><strong>Support</strong></li>
+				<li><%= link_to "Contact Us", contact_path %></li>
+			</ul>
+			<ul>
+				<li class="title"><strong>Company</strong></li>
+				<li><%= link_to "About Us", '#' %></li>
+			</ul>
+	  </nav>
+	</div>
 </footer>

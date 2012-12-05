@@ -7,17 +7,19 @@ namespace :db do
 end
 
 def make_building
-  Building.create!(name:       "The Regatta",
+  x = Building.create!(name:       "The Regatta",
                    address:    "420 East Waterside Drive",
                    city:       "Chicago",
                    state:      "IL",
                    zip_code:   "60601",
                    code:       "123456",
-                   approved:   true,
+                   website:    "www.regattachicago.com/",
                    image:      "the_regatta.jpg",
                    garage_instructions: "Designed by the firm of DeStefano + Associates, the 44-story tower's dual 
                                 elliptical glass curtain walls dramatically encircle the building, reflecting the 
                                 surrounding blues of the Chicago River and Lake Michigan.")
+  x.approved = true
+  x.save
   10.times do
     type = ["Condominiums", "Apartments", "Apartment Complex", "Building", "Complex"]
     name  = Faker::Company.name + " #{type.shuffle.first}"
