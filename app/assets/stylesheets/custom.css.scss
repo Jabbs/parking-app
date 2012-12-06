@@ -65,6 +65,7 @@ html {
 
 body {
 	@include white_grey_gradient;
+	min-height: 1500px;
 }
 
 /* typography */
