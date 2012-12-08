@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="span12">
+		<h2 class="front pull-left">Participating Buildings:</h2>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="span11">
+		<ul class="unstyled">
+		<% @buildings.each do |building| %>
+		<div class="span5 pull-left">
+			<li><%= link_to "#{building.name}", building_path(building) %> (<%= building.city %>, <%= building.state %>)</li>
+		</div>
+		<% end %>
+		<div class="span12">
+			</br>
+			<li><em>Landlord or property manager? Learn how to <%= link_to 'enroll', new_building_path %> you building.</em></li>
+		</div>
+		</ul>
+	</div>
+</div>

@@ -9,5 +9,8 @@
 		<a href="http://<%= @building.website %>" title="<%= @building.name %>" target="_blank"><%= @building.website %></a>
 		</br>
 	</div>
+	<div class="span8">
+		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@building.latitude}%2C#{@building.longitude}" %>
+	</div>
 </div>
 

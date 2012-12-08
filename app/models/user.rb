@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :searches
   has_many :rent_hours, through: :listings
   has_many :spots, through: :leases
+  has_many :reservations
   has_secure_password
   before_save { self.email.downcase! }
   before_save { self.first_name.capitalize! }

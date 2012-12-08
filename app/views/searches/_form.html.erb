@@ -1,8 +1,15 @@
 <%= form_for(@search) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-<%= f.hidden_field :building_id, value: current_user.building.id %>
-<h3>When do you need to RESERVE a spot?
-</h3>
+
+<div class="row">
+	<div class="building_select span2">
+		<label>Parking Garage:</label>
+	</div>
+	
+	<div class="big-left-margin span6">
+		<%= f.collection_select :building_id, @buildings, :id, :full_building_name, {}, class: "span6" %>
+	</div>
+</div>
 <hr>
 <div class="row">
 	<div class="span2 well well-red big-left-margin">
@@ -31,10 +38,15 @@
 		</div>
 	</div>
 </div>
+<hr>
 <div class="row">
 	<div class="span5 pull-left">
-		<p>*spots are <span class="money">$3</span> per hour up to <span class="money">$10</span> 
-			if under 8 hours. Anything over 8 hours will be <span class="money">$20</span> per day.</p>
+		<p>
+			<em>
+				*spots are <span class="money">$3</span> per hour up to <span class="money">$10</span> 
+					if under 8 hours. Anything over 8 hours will be <span class="money">$20</span> per day.
+			</em>
+		</p>
 	</div>
 	<div class="span1 pull-right">
 		<%= f.submit "Search", class: "btn btn-large pull-right" %>

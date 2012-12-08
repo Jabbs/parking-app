@@ -160,6 +160,10 @@ legend {
   @include box_sizing;
 }
 
+.building_select {
+	margin-left: 60px;
+}
+
 /* Wells */
 
 .custom-well {
@@ -202,6 +206,27 @@ legend {
 	 @include rounded_border;
 }
 
+.search-well {
+	 padding: 10px 10px 10px 10px;
+	 margin: -1px 0 20px 1px;
+	 @include white_grey_gradient;
+	 border: .5px solid $grey;
+	 border-top: 1px solid $grey;
+		 -webkit-border-radius: 5px;
+		    -moz-border-radius: 5px;
+		         border-radius: 5px;
+		 -webkit-border-top-left-radius: 0;
+		    -moz-border-top-left-radius: 0;
+		         border-top-left-radius: 0;
+		 -webkit-border-top-right-radius: 0;
+		    -moz-border-top-right-radius: 0;
+		         border-top-right-radius: 0;
+		 -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+		    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+		         box-shadow: 0 1px 2px rgba(0,0,0,.3);
+
+}
+
 .well-red {
 	background: $darkred;
 }
@@ -237,6 +262,9 @@ legend {
 		 -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
 		    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
 		         box-shadow: 0 1px 2px rgba(0,0,0,.3);
+						 -webkit-border-top-left-radius: 0;
+						    -moz-border-top-left-radius: 0;
+						         border-top-left-radius: 0;
 	h1 {
 		color: white;
 		font-size: 3em;
@@ -281,6 +309,12 @@ hr {
 }
 
 /* Front Page */
+
+.nav-tabs {
+	margin-bottom: 0;
+	.active {
+	}
+}
 
 .home-well {
 	 padding: 10px 10px 10px 10px;
@@ -343,9 +377,12 @@ ul.nav li.dropdown:hover ul.dropdown-menu{
 
 header {
 	.navbar {
-		border: none;
+		border-bottom: 1px solid $grey;
 	}
 	.navbar-inner {
+		-webkit-box-shadow: none; 
+		  -moz-box-shadow: none; 
+		  box-shadow: none;
 		@include white_grey_gradient;
 		p {
 			margin-right: 10px;

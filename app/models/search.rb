@@ -5,6 +5,7 @@ class Search < ActiveRecord::Base
   validates_date :start_date, :before => lambda { 1.year.from_now }
   validates_date :end_date, :on_or_after => :start_date
   validates :end_time_slot, :numericality => { greater_than: :start_time_slot }, if: :same_day?
+  belongs_to :building
   
   def same_day?
     start_date == end_date

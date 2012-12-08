@@ -1,11 +1,10 @@
 <div class="row">
 	<div class="span7">
-			<ul class="nav nav-tabs">
-			  <li class="active"><a href="#">Search</a></li>
-			  <li><%= link_to 'Reservations', reservations_path %></li>
-			  <li><%= link_to 'Checkout', checkout_path %></li>
-			</ul>
-		<div class="custom-well-no-left-padding span7">
+		<ul class="nav nav-tabs span7">
+		  <li class="active"><a href="#">Find Parking</a></li>
+		  <li><%= link_to 'Share My Spot', new_listing_path %></li>
+		</ul>
+		<div class="search-well span7">
 			<%= render 'form' %>
 		</div>
 	</div>
@@ -17,5 +16,9 @@
 		</div>
 	</div>
 </div>
-
-
+<hr>
+<%= render 'buildings/participating_buildings' %>
+</br>
+<hr>
+</br>
+<%= render 'shared/how_does_it_work' %>

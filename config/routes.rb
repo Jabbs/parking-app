@@ -24,6 +24,6 @@ Parkingapp::Application.routes.draw do
   resources :reservations, only: [:create, :destroy, :index, :show]
   resources :verifications, only: [:show]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  root :to => 'sessions#new'
+  root :to => 'searches#new'
 
 end

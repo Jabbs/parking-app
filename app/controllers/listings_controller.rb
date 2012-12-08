@@ -19,8 +19,11 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @listings = Listing.where(user_id: current_user.id).where("end_date >= ?", Date.today).order("start_date ASC").order("spot_id ASC")
-    @spots = current_user.spots
+    @buildings = Building.where(approved: true).order("name ASC")
+    if current_user
+      @listings = Listing.where(user_id: current_user.id).where("end_date >= ?", Date.today).order("start_date ASC").order("spot_id ASC")
+      @spots = current_user.spots
+    end
   end
   
   def create

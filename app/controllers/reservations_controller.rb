@@ -5,10 +5,11 @@ class ReservationsController < ApplicationController
   end
   
   def create
-    if Cart.where(user_id: current_user).last
-      @cart = Cart.where(user_id: current_user).last
+    if session[:cart_id]
+      @cart = Cart.find_by_id(session[:cart_id])
     else
-      @cart = Cart.create!(user_id: current_user.id)
+      @cart = Cart.create!
+      session[:cart_id] = @cart.id
     end
     search = Search.find_by_id(params[:search_id])
     @reservation = Reservation.create!(start_date: search.start_date, end_date: search.end_date, start_time_slot: search.start_time_slot,
@@ -19,11 +20,15 @@ class ReservationsController < ApplicationController
     rh_id_group.each do |rh_id|
       ReservationRentHourRelationship.create!(reservation_id: @reservation.id, rent_hour_id: rh_id)
     end
-    redirect_to search_url(Search.where(user_id: current_user.id).last)
+    if current_user
+      redirect_to search_url(Search.where(user_id: current_user.id).last)
+    else
+      redirect_to new_search_url
+    end
   end
   
   def checkout
-    @cart = Cart.where(user_id: current_user.id).last if Cart.where(user_id: current_user.id).last
+    @cart = Cart.find_by_id(session[:cart_id])
   end
   
   def index

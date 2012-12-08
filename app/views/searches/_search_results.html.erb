@@ -1,6 +1,6 @@
 <% if @search2.rent_hour_groups.count != 0 %>
 
-<h3 class="red"><%= pluralize(@search2.rent_hour_groups.count, 'spot') %> available!
+<h3 class="red"><%= pluralize(@search2.rent_hour_groups.count, 'spot') %> available at <%= @search2.building.name %>!
 </h3>
 <hr>
 

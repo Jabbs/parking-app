@@ -10,6 +10,7 @@ gem "carrierwave"
 gem "fog", "~> 1.3.1"
 gem 'validates_timeliness', '~> 3.0'
 gem 'bootstrap-sass', '2.0.0'
+gem "geocoder"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
