@@ -2,12 +2,7 @@ class ListingsController < ApplicationController
   def index
     @listings = Listing.where("end_date >= ?", Date.today)
     @renthours_today = RentHour.where(date: Date.today)
-    @renthours_today_1 = RentHour.where(date: (Date.today + 1))
-    @renthours_today_2 = RentHour.where(date: (Date.today + 2))
-    @renthours_today_3 = RentHour.where(date: (Date.today + 3))
-    @renthours_today_4 = RentHour.where(date: (Date.today + 4))
-    @renthours_today_5 = RentHour.where(date: (Date.today + 5))
-    @renthours_today_6 = RentHour.where(date: (Date.today + 6))
+    @buildings = Building.where(approved: true).order("name ASC")
   end
   
   def index2
@@ -32,6 +27,7 @@ class ListingsController < ApplicationController
     @listing.user_id = current_user.id
     @listing.building_id = current_user.building_id
     @spots = current_user.spots
+    @buildings = Building.where(approved: true).order("name ASC")
     
     if @listing.save
       
