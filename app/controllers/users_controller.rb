@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     elsif @user.save
       sign_in @user
       @user.send_verification_email
-      redirect_to new_search_url, notice: "Welcome #{@user.first_name} #{@user.last_name}! A verification email has been sent to 
+      redirect_to new_listing_url, notice: "Welcome #{@user.first_name} #{@user.last_name}! A verification email has been sent to 
                                      your email."
     else
       render action: "new"

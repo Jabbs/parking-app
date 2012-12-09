@@ -5,6 +5,12 @@
 				<label>Which Spot?</label>
 		    <%= f.collection_select :spot_id, @spots, :id, :name, {}, class: "input-small" %>
 			</div>
+			<div class="span4">
+				<label>Building:</label>
+				<em>
+					<%= current_user.building.full_building_name %>
+				</em>
+			</div>
 		</div>
 		<hr>
 		<div class="row">

@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email].downcase)
     if user && user.authenticate(params[:password])
       sign_in user
-      redirect_to new_search_url
+      redirect_to new_listing_url
     else
-      redirect_to login_url, alert: "Invalid email/password combination"
+      redirect_to new_listing_url, alert: "Invalid email/password combination"
     end
   end
 

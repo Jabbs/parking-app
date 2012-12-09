@@ -5,8 +5,17 @@
 			<%= form_tag('/checkout') do %>
 			  <fieldset>
 					<legend>User Info</legend>
+					<% if current_user %>
+					<div class="span4">
+						<p>
+							<%= current_user.first_name %> <%= current_user.last_name %></br>
+							<%= current_user.email %>
+						</p>
+					</div>
+					<% else %>
 					<input type="text" name="email" placeholder="Email">
 					<input type="text" name="license_plate" placeholder="License Plate #" class="input-small">
+					<% end %>
 			    <legend>Billing Information</legend>
 					<%= image_tag 'billing_options.jpg', size: "150x150" %></br>
 			    <input type="text" name="card_name" placeholder="Cardholder's Name">

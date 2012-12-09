@@ -64,7 +64,6 @@ html {
 }
 
 body {
-	@include white_grey_gradient;
 	min-height: 1500px;
 }
 
@@ -130,6 +129,18 @@ legend {
 	color: green;
 }
 
+.small {
+	font-size: 0.7em;
+	font-weight: normal;
+	color: $darkgrey;
+}
+
+.verticalLine {
+    border-left: 1px solid $grey;
+		padding-left: 50px;
+		height: 200px;
+}
+
 .front {
 	font-size: 2.2em;
 	margin: 0 auto;
@@ -151,6 +162,10 @@ legend {
 
 
 /* Miscelaneous */
+
+.garage-background {
+	background-image:url('chicago-parking-garage.jpg');
+}
 
 .debug_dump {
   clear: both;
@@ -228,7 +243,8 @@ legend {
 }
 
 .well-red {
-	background: $darkred;
+//	background: $darkred;
+	background-image:url('parking-garage.jpg');
 }
 
 .well-blue {
@@ -312,7 +328,14 @@ hr {
 
 .nav-tabs {
 	margin-bottom: 0;
+	li {
+
+		font-size: 1.7em;
+	}
 	.active {
+
+		font-size: 1.7em;
+		font-color: $red;
 	}
 }
 

@@ -1,8 +1,7 @@
 class Search < ActiveRecord::Base
   attr_accessible :start_date, :building_id, :end_date, :start_time_slot, :end_time_slot
   validates :end_date, :start_date, :start_time_slot, :end_time_slot, :building_id, presence: true
-  validates_date :start_date, :on_or_after => lambda { Date.today }
-  validates_date :start_date, :before => lambda { 1.year.from_now }
+  validates_date :start_date, :on_or_after => lambda { Date.today }, :before => lambda { 1.year.from_now }
   validates_date :end_date, :on_or_after => :start_date
   validates :end_time_slot, :numericality => { greater_than: :start_time_slot }, if: :same_day?
   belongs_to :building

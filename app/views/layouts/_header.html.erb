@@ -16,8 +16,11 @@
             <ul class="dropdown-menu">
               <li><%= link_to 'My Account', user_path(current_user) %></li>
               <li><%= link_to 'Register My Spot', new_lease_path %></li>
-							<li><%= link_to "Reservations (#{current_user.reservations.where(paid: true).where("end_date >= ?", Date.today).count})", reservations_path %> </li>
+							<li><%= link_to "My Reservations (#{current_user.reservations.where(paid: true).where("end_date >= ?", Date.today).count})", reservations_path %> </li>
               <li class="divider"></li>
+							<% if Cart.find_by_id(session[:cart_id]) && Cart.find_by_id(session[:cart_id]).reservations != 0 %>
+							<li><%= link_to "Checkout", checkout_path %></li>
+							<% end %>
               <li><%= link_to 'Logout', logout_path, method: :delete %></li>
             </ul>
           </li>
