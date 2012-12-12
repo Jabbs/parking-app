@@ -22,7 +22,7 @@ class PasswordResetsController < ApplicationController
       redirect_to new_password_reset_path, alert: "Password reset has expired."
     elsif @user.update_attributes(params[:user])
       sign_in @user
-      redirect_to root_url, notice: "Password has been reset!"
+      redirect_to new_listing_url, notice: "Password has been reset!"
     else
       redirect_to edit_password_reset_path, alert: "Invalid password/confirmation combination."
     end

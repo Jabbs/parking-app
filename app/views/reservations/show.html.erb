@@ -22,9 +22,9 @@
 				<h4 class="blue">
 					<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
 					<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
+					<p class="small inline">(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)</p>
 				</h4>
-					(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
-					</br></br>
+				</br>
 				<strong>Confirmation Number: <span class="red"><%= @reservation.confirmation_number %></span></strong></br></br>
 				<strong>Garage Instructions:</strong></br>
 				<p>

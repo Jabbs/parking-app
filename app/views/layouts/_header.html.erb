@@ -18,7 +18,7 @@
               <li><%= link_to 'Register My Spot', new_lease_path %></li>
 							<li><%= link_to "My Reservations (#{current_user.reservations.where(paid: true).where("end_date >= ?", Date.today).count})", reservations_path %> </li>
               <li class="divider"></li>
-							<% if Cart.find_by_id(session[:cart_id]) && Cart.find_by_id(session[:cart_id]).reservations != 0 %>
+							<% if Cart.find_by_id(session[:cart_id]) && Cart.find_by_id(session[:cart_id]).reservations.count != 0 %>
 							<li><%= link_to "Checkout", checkout_path %></li>
 							<% end %>
               <li><%= link_to 'Logout', logout_path, method: :delete %></li>

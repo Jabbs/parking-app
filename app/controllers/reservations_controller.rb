@@ -55,28 +55,32 @@ class ReservationsController < ApplicationController
       @cart = Cart.find_by_id(session[:cart_id])
       
       unless @cart.rent_hours.where(reserved: true).count != 0
-        @cart.reservations.each do |res|
-          res.paid = true
-          res.save
-        end
-        @cart.rent_hours.each do |rh|
-          rh.reserved = true
-          rh.save
-        end
-        @user = current_user if current_user
-        @cart.reservations.each do |reservation|
-          if current_user
-            UserMailer.reservation_email(@user, reservation).deliver
-          else
-            reservation.update_attribute(:email, params[:email])
-            reservation.update_attribute(:license_plate, params[:license_plate])
-            UserMailer.reservation_email_no_user(reservation).deliver
+        if params[:email].present? || current_user
+          @cart.reservations.each do |res|
+            res.paid = true
+            res.save
           end
+          @cart.rent_hours.each do |rh|
+            rh.reserved = true
+            rh.save
+          end
+          @user = current_user if current_user
+          @cart.reservations.each do |reservation|
+            if current_user
+              UserMailer.reservation_email(@user, reservation).deliver
+            else
+              reservation.update_attribute(:email, params[:email])
+              reservation.update_attribute(:license_plate, params[:license_plate])
+              UserMailer.reservation_email_no_user(reservation).deliver
+            end
+          end
+          @cart.destroy
+          session.delete(:cart_id)
+          redirect_to root_url, notice: "Your payment has been processed. Parking passes have been
+          sent to your email."
+        else
+          redirect_to checkout_path, alert: "Please enter an email address for parking pass delivery."
         end
-        @cart.destroy
-        session.delete(:cart_id)
-        redirect_to root_url, notice: "Your payment has been processed. Parking passes have been
-        sent to your email."
       else
         redirect_to root_url, alert: "Your requested parking spot has already been reserved. Please search for a new spot and time."
         @cart.destroy

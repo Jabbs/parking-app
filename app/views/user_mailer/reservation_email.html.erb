@@ -1,19 +1,36 @@
-<strong>Location:</strong></br>
-<%= @reservation.spot.building.name %></br>
-<%= @reservation.spot.building.address %> </br> <%= @reservation.spot.building.city %>, 
-<%= @reservation.spot.building.state %> <%= @reservation.spot.building.zip_code %></br>
-<strong>Spot: <span class="blue"><%= @reservation.spot.name %></span></strong>
-</br>
-</br>
-<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
-<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
-
-	(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
-	</br></br>
-<strong>Confirmation Number: <span class="red"><%= @reservation.confirmation_number %></span></strong></br></br>
-<strong>Garage Instructions:</strong></br>
-<p>
-	<em>
-	<%= @reservation.spot.building.garage_instructions %>
-	</em>
-</p>
+<style>
+body{margin:0;width:100%;height:100%} 
+body,td,input,textarea,select{font-family:arial,sans-serif} 
+input,textarea,select{font-size:100%} 
+</style>
+</head>
+	<body>
+		<table>  
+		  <tr><td><%= Date.today.strftime("%b %e, %Y") %></td></tr>  
+			<tr></tr>
+	    <tr><td><strong>Location:</strong></td></tr>
+			<tr><td><%= @reservation.spot.building.name %></td></tr>
+			<tr><td><%= @reservation.spot.building.address %></td></tr>
+			<tr><td>
+				<%= @reservation.spot.building.city %>, <%= @reservation.spot.building.state %>
+				<%= @reservation.spot.building.zip_code %>
+			</td></tr>
+			<tr></tr>
+			<tr><td><strong>Spot: <span class="blue"><%= @reservation.spot.name %></span></strong></td></tr>
+	    <tr><td>
+	      	<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
+					<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
+					(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
+	    </td></tr>
+			<tr><td>
+				<strong>Confirmation Number: <span class="red"><%= @reservation.confirmation_number %></span></strong>
+			</td></tr>
+			<tr><td><strong>Garage Instructions:</strong></td></tr>
+			<tr><td><strong><em><%= @reservation.spot.building.garage_instructions %></em></strong></td></tr>
+			<tr></tr>
+			<tr><td>Sincerely,</td></tr>
+			<tr></tr>
+			<tr><td>ShareTheLot</td></tr>
+		</table>
+	</body>
+</html>

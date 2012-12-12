@@ -49,7 +49,7 @@
 					</select>
 					<hr>
 			  </fieldset>
-			<%= submit_tag "Confirm Purchase", class: "btn btn-large" %>
+			<%= submit_tag "Confirm Purchase - #{number_to_currency(total_price(@cart.reservations))}", class: "btn btn-large" %>
 			<% end %>
 			<%= link_to "Cancel", root_path %>
 		</div> <!-- End of cc form -->
@@ -59,7 +59,7 @@
 				<thead>
 				  <tr>
 						<th></th>
-				    <th>Spot</th>
+				    <th>Location</th>
 				    <th>Reservation</th>
 				    <th>Time</th>
 						<th></th>
@@ -69,9 +69,16 @@
 				<% @cart.reservations.each do |reservation| %>
 				  <tr>
 						<td><%= link_to raw('<i class="icon-remove-sign"></i>'), reservation_path(reservation), method: :delete %></td>
-						<td><%= reservation.spot.name %></td>
-						<td><%= reservation.start_date.strftime("%m/%d") %> <%= reservation.time_slot_start_hour %> -
-						<%= reservation.end_date.strftime("%m/%d") %> <%= reservation.time_slot_end_hour %></td>
+						<td>
+							<%= reservation.spot.building.name %></br>
+							<%= reservation.spot.building.address %></br>
+							<%= reservation.spot.building.city %>, <%= reservation.spot.building.state %></br>
+						</td>
+						<td>
+							<%= reservation.start_date.strftime("%m/%d") %> <%= reservation.time_slot_start_hour %> -
+							<%= reservation.end_date.strftime("%m/%d") %> <%= reservation.time_slot_end_hour %></br>
+							Parking Spot: <%= reservation.spot.name %>
+						</td>
 						<td><%= pluralize(reservation.rent_hours.count, 'hr') %></td>
 						<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
 					</tr>
@@ -87,12 +94,12 @@
 			</table>
 			<% end %>
 			<div class="span7 pull-right">
-			<p class="red">
-				*** Please review your parking reservation(s) before you confirm your purchase. 
-				Parking passes will be sent to your email address. They may also be accessed in 
-				the <%= link_to 'Reservations', reservations_path %> section if you have
-				a ShareTheLot account. Parking passes are required by each vehicle for parking entry.***
-			</p>
+				<p class="red">
+					*** Please review your parking reservation(s) before you confirm your purchase. 
+					Parking passes will be sent to your email address. They may also be accessed in 
+					the <%= link_to 'Reservations', reservations_path %> section if you have
+					a ShareTheLot account. Parking passes are required by each vehicle for parking entry.***
+				</p>
 			</div>
 		</div> <!-- End Table -->
 	</div> <!-- End Custom Well -->
