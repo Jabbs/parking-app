@@ -2,6 +2,15 @@ class ReservationsController < ApplicationController
   
   def show
     @reservation = Reservation.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReservationPdf.new(@reservation, view_context)
+        send_data pdf.render, filename: "reservation_#{@reservation.confirmation_number}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
   
   def create
@@ -89,6 +98,13 @@ class ReservationsController < ApplicationController
     else
       redirect_to checkout_path, alert: "There was a problem finding your reservation."
     end
+  end
+  
+  def email
+    @user = current_user
+    @reservation = Reservation.find_by_id(params[:reservation_id])
+    UserMailer.reservation_email(@user, @reservation).deliver
+    redirect_to reservations_path, notice: "Parking pass has been resent to your email."
   end
   
   def destroy

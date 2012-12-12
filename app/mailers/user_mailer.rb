@@ -14,12 +14,14 @@ class UserMailer < ActionMailer::Base
   def reservation_email(user, reservation)
     @user = user
     @reservation = reservation
+    attachments["reservation_#{@reservation.confirmation_number}.pdf"] = {content: ReservationPdf.new(@reservation, view_context).render()}
     mail(to: "#{user.first_name} #{user.last_name} <#{user.email}>", subject: "ShareTheLot - Parking Pass", 
     from: "orders@sharethelot.com")
   end
   
   def reservation_email_no_user(reservation)
     @reservation = reservation
+    attachments["reservation_#{@reservation.confirmation_number}.pdf"] = {content: ReservationPdf.new(@reservation, view_context).render()}
     mail(to: "<#{reservation.email}>", subject: "ShareTheLot - Parking Pass", 
     from: "orders@sharethelot.com")
   end

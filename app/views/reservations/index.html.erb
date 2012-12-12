@@ -27,8 +27,8 @@
 					<td><%= pluralize(reservation.rent_hours.count, 'hour') %></td>
 					<td><%= reservation.start_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_start_hour %></td>
 					<td><%= reservation.end_date.strftime("%b %e, %Y") %> <%= reservation.time_slot_end_hour %></td>
-					<td><i class="icon-print"></i> <%= link_to 'Print', '#' %> | 
-							<i class="icon-envelope"></i> <%= link_to 'Email', '#' %></td>
+					<td><i class="icon-print"></i> <%= link_to 'Print', reservation_path(reservation, format: 'pdf') %> | 
+							<i class="icon-envelope"></i> <%= link_to 'Email', email_path(reservation_id: reservation.id) %></td>
 				</tr>
 			<% end %>
 			</tbody>

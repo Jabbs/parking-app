@@ -1,16 +1,8 @@
-Location:
-<%= @reservation.spot.building.name %>
-<%= @reservation.spot.building.address %>
-<%= @reservation.spot.building.city %>, <%= @reservation.spot.building.state %> <%= @reservation.spot.building.zip_code %>
+<%= Date.today.strftime("%b %e, %Y") %>
 
-Spot: <%= @reservation.spot.name %>
+Your parking pass for <%= @reservation.spot.building.name %> is attached to this email.
+Confirmation number: <%= @reservation.confirmation_number %>
 
-<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
-<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
-(<%= pluralize(@reservation.rent_hours.count, 'hour') %>)
+Sincerely,
 
-Confirmation Number: <%= @reservation.confirmation_number %>
-
-Garage Instructions:
-
-<%= @reservation.spot.building.garage_instructions %>
+ShareTheLot.com

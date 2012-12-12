@@ -8,6 +8,7 @@ Parkingapp::Application.routes.draw do
   match '/how_it_works', to: 'static_pages#how_it_works'
   match '/checkout', to: 'reservations#checkout', via: :get
   match '/checkout', to: 'reservations#purchase', via: :post
+  match '/email', to: 'reservations#email', via: :get
   match '/reservations_at_my_spot', to: 'listings#index2', via: :get
 
   controller :sessions do

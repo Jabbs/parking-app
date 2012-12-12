@@ -4,8 +4,8 @@
 			<div class="span3 pull-left">
 				<%= link_to 'Reservations', reservations_path %> / <%= "##{@reservation.id}" %>
 			</div>
-			<div class="span2 pull-right">
-				<%= link_to raw('<i class="icon-print"></i> Print'), '#', class: "pull-right" %>
+			<div class="span3 pull-right">
+				<%= link_to raw('<i class="icon-print"></i> Print Parking Pass (PDF)'), reservation_path(@reservation, format: 'pdf'), class: "pull-right" %>
 			</div>
 		</div>
 		<hr>
@@ -19,6 +19,7 @@
 				<strong>Spot: <span class="blue"><%= @reservation.spot.name %></span></strong></br>
 			</div>
 			<div class="span5 pull-right">
+							<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x150&sensor=false&zoom=15&markers=#{@reservation.spot.building.latitude}%2C#{@reservation.spot.building.longitude}" %>
 				<h4 class="blue">
 					<%= @reservation.start_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_start_hour %>- 
 					<%= @reservation.end_date.strftime("%b %e, %Y") %> <%= @reservation.time_slot_end_hour %>
