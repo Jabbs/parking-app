@@ -6,7 +6,8 @@
 		</div>
 		<div class="span5">
 		<ul class="unstyled">
-			<li><strong><%= @user.first_name %> <%= @user.last_name %></strong></li>
+			<li><strong><%= @user.first_name %> <%= @user.last_name %></strong><p class="small inline">
+				(<%= link_to 'edit', edit_user_path(@user) %>)</p></li>
 			<li><%= @user.email %></li>
 			<li><%= @user.building.name %></li>
 			<li>Parking spot(s):
@@ -21,9 +22,6 @@
 			<dd>Member since: <%= @user.created_at.strftime("%b %e, %Y") %></dd>
 			<dd>Status: 
 				<%= @user.verified? ? 'Verified' : "Unverified" %> 
-				<% if !@user.verified? %>
-					(<%= link_to 'Resend verification email', '#' %>)
-				<% end %>
 			</dd>
 		</dl>
 		</div>

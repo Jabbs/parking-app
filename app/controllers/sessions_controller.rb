@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email].downcase)
     if user && user.authenticate(params[:password])
       sign_in user
-      redirect_back_or new_listing_url
+      redirect_to new_listing_url
     else
       redirect_to new_listing_url, alert: "Invalid email/password combination"
     end
@@ -17,6 +17,8 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:auth_token)
+    Cart.find_by_id(session[:cart_id]).destroy
+    session.delete(:cart_id)
     redirect_to root_url
   end
   

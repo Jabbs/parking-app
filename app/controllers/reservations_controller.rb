@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
-  before_filter :signed_in_user, only: [:show, :destroy, :index, :email, :edit, :update]
-  before_filter :correct_user, only: [:show, :destroy]
-  before_filter :admin_user, only: [:destroy, :edit, :update]
+  before_filter :signed_in_user, only: [:show, :index, :email, :edit, :update]
+  before_filter :correct_user, only: [:show]
+  before_filter :admin_user, only: [:edit, :update]
   
   def show
     @reservation = Reservation.find(params[:id])
@@ -46,6 +46,7 @@ class ReservationsController < ApplicationController
       rh_id_group.each do |rh_id|
         ReservationRentHourRelationship.create!(reservation_id: @reservation.id, rent_hour_id: rh_id)
       end
+      @reservation.update_attribute(:amount, price_of_reservation(@reservation.rent_hours.count))
       if current_user
         redirect_to search_url(Search.where(user_id: current_user.id).last)
       else

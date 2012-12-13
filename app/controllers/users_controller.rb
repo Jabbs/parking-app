@@ -34,6 +34,26 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    
+    if @user.update_attributes(params[:user])
+      redirect_to @user, notice: 'User has been successfully updated.'
+    else
+      render action: "edit"
+    end
+  end
+  
+  def resend
+    @user = User.find(params[:user_id])
+    @user.send_verification_email
+    redirect_to user_url(@user), notice: "A verification email has been sent. Please click on the link to verify your account."
+  end
+  
   private
   
     def signed_in_user_go_to_root

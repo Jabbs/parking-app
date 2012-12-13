@@ -31,7 +31,7 @@
 	<div class="span5">
 		<% if current_user %>
 		<div class="custom-well span4 pull-right">
-			<h3>My Listings at <%= current_user.building.name %></h3>
+			<h3>My Listings <p class="small inline">(at <%= current_user.building.name %>)</p></h3>
 			<hr>
 			<%= render 'listings' %>
 		</div>

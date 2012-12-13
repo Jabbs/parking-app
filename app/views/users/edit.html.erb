@@ -1,0 +1,43 @@
+<%= form_for(@user) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+<div class="row">
+	<div class="custom-well span5">
+		<h3 class="blue">Edit User Account Info <p class="inline"><small>(<span class="red">*</span> = required field)</small></p></h3>
+		<hr>
+		<div class="row">
+			<div class="span2">
+				<label>Name: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+		    <%= f.text_field :first_name, class: "span3", placeholder: "First Name" %> 
+				<%= f.text_field :last_name, class: "span3", placeholder: "Last Name" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Email: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+				<%= f.email_field :email, class: "span3", placeholder: "Email" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Password: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+				 <%= f.password_field :password, class: "input-small" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2">
+				<label>Confirm Password: <span class="red">*</span></label>
+			</div>
+			<div class="span2">
+				 <%= f.password_field :password_confirmation, class: "input-small" %>
+			</div>
+		</div>
+		<%= f.submit "Update account", class: "btn" %>
+	</div>
+</div>
+<% end %>

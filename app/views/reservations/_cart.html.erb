@@ -16,7 +16,7 @@
 			<td><%= reservation.start_date.strftime("%m/%d") %> <%= reservation.time_slot_start_hour %> - </br>
 			<%= reservation.end_date.strftime("%m/%d") %> <%= reservation.time_slot_end_hour %> </br>
 			(<%= pluralize(reservation.rent_hours.count, 'hour') %>) </td>
-			<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
+			<td><%= number_to_currency(reservation.amount) %></td>
 		</tr>
 	<% end %>
 		<tr>

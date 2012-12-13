@@ -80,7 +80,7 @@
 							Parking Spot: <%= reservation.spot.name %>
 						</td>
 						<td><%= pluralize(reservation.rent_hours.count, 'hr') %></td>
-						<td><%= number_to_currency(price_of_reservation(reservation.rent_hours.count)) %></td>
+						<td><%= number_to_currency(reservation.amount) %></td>
 					</tr>
 					<% end %>
 					<tr>

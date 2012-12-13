@@ -26,6 +26,23 @@
           </li>
         </ul>
 				<div class="building_name">My Building: <strong class="red"><%= current_user.building.name %></strong></div>
+				
+					<% if current_user && current_user.admin? %>
+						<ul class="nav pull-right">
+		          <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									Admin <b class="caret red-caret"></b>
+								</a>
+		            <ul class="dropdown-menu">
+									<li><%= link_to 'Users', users_path %></li>
+									<li><%= link_to 'Listings', listings_path %></li>
+									<li><%= link_to 'Buildings', buildings_path %></li>
+									<li><%= link_to 'Spots', spots_path %></li>
+		            </ul>
+		          </li>
+		        </ul>
+					<% end %>
+					
 				<% else %>
 				<h2 class="tag_in_nav">#sharing</h2>
 				<h2 class="tag_in_nav">#parking</h2>

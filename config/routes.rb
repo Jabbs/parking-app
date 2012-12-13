@@ -21,7 +21,9 @@ Parkingapp::Application.routes.draw do
   resources :listings, only: [:index, :show, :new, :edit, :create, :destroy]
   resources :spots, only: [:index, :new, :edit, :create]
   resources :buildings
-  resources :users
+  resources :users do
+    get 'resend'
+  end
   resources :reservations, only: [:create, :destroy, :index, :show]
   resources :verifications, only: [:show]
   resources :password_resets, only: [:new, :create, :edit, :update]
