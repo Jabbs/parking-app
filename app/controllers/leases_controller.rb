@@ -1,4 +1,6 @@
 class LeasesController < ApplicationController
+  before_filter :signed_in_user
+  
   def new
     @lease = Lease.new
     @spots = current_user.building.spots

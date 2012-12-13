@@ -1,27 +1,7 @@
+<legend>Login</legend>
 <div class="row">
-	<div class="span7">
-		<ul class="nav nav-tabs">
-		  <li class="active"><a href="#">Find Parking</a></li>
-		  <li><%= link_to 'Share My Spot', new_listing_path %></li>
-		</ul>
-	</div>
-	<div class="hero-unit span6">
-	  <h1>Share your parking spot and earn money.</h1>
-	  <p>
-		<% unless current_user %>
-			<%= button_to "Sign Up!", new_user_path, method: :get, class: "btn btn-large blue" %>
-		<% end %>
-	  </p>
-	</div>
-	<% unless current_user %>
-	<div class="span4 home-page-well">
+	<div class="custom-well span6">
 		<%= render 'login' %>
 	</div>
-	<% end %>
 </div>
 
-<%= render 'buildings/participating_buildings' %>
-</br>
-<hr>
-</br>
-<%= render 'shared/how_does_it_work' %>

@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
+  before_filter :signed_in_user, except: [:new, :create]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user, only: [:index, :destroy]
+  before_filter :signed_in_user_go_to_root, only: [:new, :create]
+  
   def show
     @user = User.find(params[:id])
+  end
+  
+  def index
+    @users = User.paginate(page: params[:page], per_page: 30)
   end
 
   def new
@@ -24,4 +33,21 @@ class UsersController < ApplicationController
       render action: "new"
     end
   end
+  
+  private
+  
+    def signed_in_user_go_to_root
+      if signed_in?
+        redirect_to root_url, notice: "Please sign out to create a new user."
+      end
+    end
+  
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
+    
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
 end

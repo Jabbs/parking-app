@@ -1,4 +1,7 @@
 class ReservationsController < ApplicationController
+  before_filter :signed_in_user, only: [:show, :destroy, :index, :email, :edit, :update]
+  before_filter :correct_user, only: [:show, :destroy]
+  before_filter :admin_user, only: [:destroy, :edit, :update]
   
   def show
     @reservation = Reservation.find(params[:id])
@@ -113,5 +116,16 @@ class ReservationsController < ApplicationController
     
     redirect_to new_search_url
   end
+  
+  private
+  
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
+  
+    def correct_user
+      @reservation = current_user.reservations.find_by_id(params[:id])
+      redirect_to root_url if @reservation.nil?
+    end
   
 end

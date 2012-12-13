@@ -45,3 +45,4 @@ def make_spots
     end
   end
 end
+

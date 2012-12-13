@@ -1,6 +1,10 @@
 class ListingsController < ApplicationController
+  before_filter :signed_in_user
+  before_filter :correct_user, only: [:show, :destroy, :edit, :update]
+  before_filter :admin_user, only: [:index]
+  
   def index
-    @listings = Listing.where("end_date >= ?", Date.today)
+    @listings = Listing.where("end_date >= ?", Date.today).paginate(page: params[:page], per_page: 30)
     @renthours_today = RentHour.where(date: Date.today)
     @buildings = Building.where(approved: true).order("name ASC")
   end
@@ -122,4 +126,15 @@ class ListingsController < ApplicationController
       redirect_to new_listing_url, notice: "Your listing has been removed."
     end
   end
+  
+  private
+  
+    def admin_user
+      redirect_to(root_path) unless current_user.admin?
+    end
+  
+    def correct_user
+      @listing = current_user.listings.find_by_id(params[:id])
+      redirect_to root_url if @listing.nil?
+    end
 end
