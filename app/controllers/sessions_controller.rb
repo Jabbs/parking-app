@@ -17,8 +17,8 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:auth_token)
-    Cart.find_by_id(session[:cart_id]).destroy
-    session.delete(:cart_id)
+    Cart.find_by_id(session[:cart_id]).destroy if Cart.find_by_id(session[:cart_id])
+    session.delete(:cart_id) if session[:cart_id]
     redirect_to root_url
   end
   
