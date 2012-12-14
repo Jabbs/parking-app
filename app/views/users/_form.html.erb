@@ -56,7 +56,7 @@
 <hr>
 <div class="row">
 	<div class="span2">
-		<%= f.submit 'Create account', class: "btn btn-custom btn-large" %>
+		<%= f.submit 'Create account', class: "btn btn-custom btn-large", disable_with: 'Creating...' %>
 	</div>
 	<div class="span3 pull-right">
 		<p class="pull-right"><small>Looking for <%= link_to 'Building Sign Up', new_building_path %>?</small></p>
