@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213223718) do
+ActiveRecord::Schema.define(:version => 20121214161428) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
@@ -33,18 +33,13 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.float    "longitude"
   end
 
-  create_table "cart_rent_hour_relationships", :force => true do |t|
-    t.integer  "cart_id"
-    t.integer  "rent_hour_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
   create_table "carts", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
+
+  add_index "carts", ["user_id"], :name => "index_carts_on_user_id"
 
   create_table "leases", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +48,9 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  add_index "leases", ["spot_id"], :name => "index_leases_on_spot_id"
+  add_index "leases", ["user_id"], :name => "index_leases_on_user_id"
 
   create_table "listings", :force => true do |t|
     t.integer  "user_id"
@@ -66,6 +64,14 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.integer  "building_id"
   end
 
+  add_index "listings", ["building_id"], :name => "index_listings_on_building_id"
+  add_index "listings", ["end_date"], :name => "index_listings_on_end_date"
+  add_index "listings", ["end_time_slot"], :name => "index_listings_on_end_time_slot"
+  add_index "listings", ["spot_id"], :name => "index_listings_on_spot_id"
+  add_index "listings", ["start_date"], :name => "index_listings_on_start_date"
+  add_index "listings", ["start_time_slot"], :name => "index_listings_on_start_time_slot"
+  add_index "listings", ["user_id"], :name => "index_listings_on_user_id"
+
   create_table "rent_hours", :force => true do |t|
     t.integer  "listing_id"
     t.boolean  "reserved",    :default => false
@@ -78,7 +84,13 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.integer  "building_id"
   end
 
+  add_index "rent_hours", ["building_id"], :name => "index_rent_hours_on_building_id"
+  add_index "rent_hours", ["date"], :name => "index_rent_hours_on_date"
   add_index "rent_hours", ["id"], :name => "index_rent_hours_on_id"
+  add_index "rent_hours", ["listing_id"], :name => "index_rent_hours_on_listing_id"
+  add_index "rent_hours", ["renter_id"], :name => "index_rent_hours_on_renter_id"
+  add_index "rent_hours", ["spot_id"], :name => "index_rent_hours_on_spot_id"
+  add_index "rent_hours", ["time_slot"], :name => "index_rent_hours_on_time_slot"
 
   create_table "reservation_rent_hour_relationships", :force => true do |t|
     t.integer  "reservation_id"
@@ -86,6 +98,10 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "reservation_rent_hour_relationships", ["rent_hour_id", "reservation_id"], :name => "index_rent_hour_reservation", :unique => true
+  add_index "reservation_rent_hour_relationships", ["rent_hour_id"], :name => "index_reservation_rent_hour_relationships_on_rent_hour_id"
+  add_index "reservation_rent_hour_relationships", ["reservation_id"], :name => "index_reservation_rent_hour_relationships_on_reservation_id"
 
   create_table "reservations", :force => true do |t|
     t.date     "start_date"
@@ -105,6 +121,11 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.integer  "amount"
   end
 
+  add_index "reservations", ["cart_id"], :name => "index_reservations_on_cart_id"
+  add_index "reservations", ["owner_id"], :name => "index_reservations_on_owner_id"
+  add_index "reservations", ["spot_id"], :name => "index_reservations_on_spot_id"
+  add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
+
   create_table "searches", :force => true do |t|
     t.date     "end_date"
     t.integer  "building_id"
@@ -116,12 +137,17 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.date     "start_date"
   end
 
+  add_index "searches", ["building_id"], :name => "index_searches_on_building_id"
+  add_index "searches", ["user_id"], :name => "index_searches_on_user_id"
+
   create_table "spots", :force => true do |t|
     t.string   "name"
     t.integer  "building_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "spots", ["building_id"], :name => "index_spots_on_building_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -140,5 +166,8 @@ ActiveRecord::Schema.define(:version => 20121213223718) do
     t.datetime "password_reset_sent_at"
     t.boolean  "admin",                  :default => false
   end
+
+  add_index "users", ["building_id"], :name => "index_users_on_building_id"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

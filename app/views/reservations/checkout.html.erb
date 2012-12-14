@@ -49,7 +49,8 @@
 					</select>
 					<hr>
 			  </fieldset>
-			<%= submit_tag "Confirm Purchase - #{number_to_currency(total_price(@cart.reservations))}", class: "btn btn-large" %>
+			<%= submit_tag "Confirm Purchase - #{number_to_currency(total_price(@cart.reservations))}", class: "btn btn-large", 
+			 		disable_with: "Processing..."%>
 			<% end %>
 			<%= link_to "Cancel", root_path %>
 		</div> <!-- End of cc form -->

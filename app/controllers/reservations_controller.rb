@@ -67,7 +67,7 @@ class ReservationsController < ApplicationController
     if Cart.find_by_id(session[:cart_id])
       @cart = Cart.find_by_id(session[:cart_id])
       
-      unless @cart.rent_hours.where(reserved: true).count != 0
+      if @cart.rent_hours.where(reserved: true).count == 0
         if params[:email].present? || current_user
           @cart.reservations.each do |res|
             res.paid = true
